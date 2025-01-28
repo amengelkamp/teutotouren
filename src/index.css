@@ -58,13 +58,23 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Exakte Zentrierung */
-  padding: 20px; /* Abstand innerhalb der Box */
-  background-color: rgba(255, 255, 255, 0.8); /* Halbtransparenter Hintergrund */
+  padding: 10px; /* Abstand innerhalb der Box */
+  background-color: green; /* Halbtransparenter Hintergrund */
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   justify-content: space-between;
   text-align: center;
   border-radius: 8px;
 }
 
+.deinStandort, .locationService, .formOfTravel, .travelLength, .vacationLength, .accommodation {
+background-color: rgb(250, 250, 250);
+border-radius: 8px;
+height: 70px;
+
+}
+
+.searchButton {
+  background-color: rgb(250, 250, 250);
+}
