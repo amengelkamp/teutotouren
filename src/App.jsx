@@ -19,12 +19,24 @@ function App() {
             alt="Wandern im Wald 01" 
           />
           <div className="searchbarWithFilters">
-            <div className="locationService">Dein Standort</div>
-
-            <div className="formOfTravel">formOfTravel</div>
+            <div className="locationService">
+                <input 
+                type="text"
+                placeholder="Dein Standort"
+                className="locationInput"
+                />
+                <button className="locationSearch">📍</button>
+              </div>
+            <div className="formOfTravel">
+              <button className="publicTransportation">🚆</button>
+              <button className="byCar">🚗</button>  
+            </div>
             <div className="travelLength">travelLength</div>
             <div className="vacationLength">vacationLength</div>
-            <div className="accommodation">accomodation</div>
+            <div className="accommodation">
+              <button className="hotel">🏨</button>
+              <button className="camping">⛺</button>  
+            </div>
             <button className="searchButton">Suchen</button>
           </div>
       </div>
