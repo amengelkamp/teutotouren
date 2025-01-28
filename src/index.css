@@ -84,7 +84,7 @@ height: 70px;
   color: white; 
 }
 
-.accommodation, .formOfTravel, .locationService {
+.vacationLength, .travelLength, .accommodation, .formOfTravel, .locationService {
   display: flex;
   flex-direction: row;
 }

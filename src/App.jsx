@@ -31,8 +31,18 @@ function App() {
               <button className="publicTransportation">🚆</button>
               <button className="byCar">🚗</button>  
             </div>
-            <div className="travelLength">travelLength</div>
-            <div className="vacationLength">vacationLength</div>
+            <div className="travelLength">
+            <input 
+                type="text"
+                placeholder="Max. Anreisezeit"
+                className="locationInput"
+                /></div>
+            <div className="vacationLength">
+              <input 
+                  type="text"
+                  placeholder="Reisedauer in Tagen"
+                  className="locationInput"
+                  /></div>
             <div className="accommodation">
               <button className="hotel">🏨</button>
               <button className="camping">⛺</button>  
