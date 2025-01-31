@@ -39,7 +39,7 @@ function App() {
 
 //COUNTER ANREISEZEIT 
 
-const [hourse, setHours] = useState(""); //State für Ankunftszeit in Stunden 
+const [hours, setHours] = useState(""); //State für Ankunftszeit in Stunden 
 
 const setAnreiseZeit = () => {
 
