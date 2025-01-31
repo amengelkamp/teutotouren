@@ -7,6 +7,8 @@ import './App.css'
 
 function App() {
 
+  //STANDORTERMITTLUNG - noch auslagern in eigenes file und dann hier referenzieren
+
   const [location, setLocation] = useState(""); //State für den Standort 
   const [error, setError] = useState(""); //Abfangen von Fehlern wenn diese eintreten
 
@@ -35,7 +37,13 @@ function App() {
   };
 
 
+//COUNTER ANREISEZEIT 
 
+const [hourse, setHours] = useState(""); //State für Ankunftszeit in Stunden 
+
+const setAnreiseZeit = () => {
+
+}
 
 
 
@@ -72,19 +80,20 @@ function App() {
             <div className="travelLength">
             <input 
                 type="text"
-                placeholder="Max. Anreisezeit"
+                placeholder="Max. Anreisezeit in Stunden"
                 className="locationInput"
-                /></div>
+                />
+                  <button className="CounterUp">{"\u2191"}</button>
+                  <button className="CounterDown">{"\u2193"}</button></div>
             <div className="vacationLength">
               <input 
                   type="text"
                   placeholder="Reisedauer in Tagen"
                   className="locationInput"
-                  /></div>
-            <div className="accommodation">
-              <button className="hotel">🏨</button>
-              <button className="camping">⛺</button>  
-            </div>
+                  />
+                <button className="CounterUp">{"\u2191"}</button>
+                <button className="CounterDown">{"\u2193"}</button> 
+                  </div>
             <button className="searchButton">Suchen</button>
           </div>
           </div>
