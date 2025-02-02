@@ -6,7 +6,7 @@ import viteLogo from '/vite.svg'
 import { useState, useEffect } from 'react'
 import './App.css'
 import SearchbarPart from './view/searchbarPart/searchbarPart'
-
+import RoutesPart from './view/routesPart/routesPart';
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
         <div className="logo">Logo</div>
       </div>
       <SearchbarPart/>
+      <RoutesPart/>
     </div>
   );
 }
