@@ -8,7 +8,6 @@
                     - Reiseart
                     - Anreisezeit berechnet für Startpunkt der ersten Etappe
                     - Reisedauer/Etappenanzahl in Tagen
-                    - 
 
                 []einzelneEtappe
                     [] etappenName

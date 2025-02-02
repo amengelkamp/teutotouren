@@ -1,0 +1,5 @@
+.CalculationResultsPart {
+    display: flex;
+    flex-direction: row; 
+    background-color: #75e078;
+}
