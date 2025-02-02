@@ -1,4 +1,5 @@
 
-
-/*<EtappenBild>*/
-/*<EtappenDescription>*/
+.etappenPart {
+    display: flex;
+    flex-direction: column;
+}

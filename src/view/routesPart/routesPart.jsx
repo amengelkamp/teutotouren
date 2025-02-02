@@ -6,10 +6,10 @@ const RoutesPart = () => {
     return (
         <div className="routesPart">
                 <div className="routeResults">
-                    <EtappenPart>
+                    <EtappenPart />
                 </div>
         </div>
-            )
+            );
     }
 
 
