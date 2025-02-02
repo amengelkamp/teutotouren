@@ -4,12 +4,11 @@
 import viteLogo from '/vite.svg'
 import { useState, useEffect } from 'react'
 import './App.css'
-//import searchbarpart
-
+import searchbarPart from './view/searchbarPart/searchbarPart'
 
 
 function App() {
-
+  <searchbarPart/>
 
 
   return (
