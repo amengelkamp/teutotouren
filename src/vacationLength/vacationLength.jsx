@@ -1,3 +1,6 @@
+import React from 'react';
+import './vacationLength.css';
+
 const VacationLength = () => {
         return (
             <div className="vacationLength">

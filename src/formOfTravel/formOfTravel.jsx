@@ -1,4 +1,7 @@
-const formOfTravel = () => {
+import React from 'react';
+import './formOfTravel.css';
+
+const FormOfTravel = () => {
     return (
         <div className="formOfTravel">
             <button className="publicTransportation">🚆</button>
@@ -8,4 +11,4 @@ const formOfTravel = () => {
 }
 
 
-export default formOfTravel;
+export default FormOfTravel;

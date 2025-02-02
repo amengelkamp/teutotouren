@@ -1,3 +1,6 @@
+import React from 'react';
+import './travelLength.css';
+
 const TravelLength = () => {
     return (
         <div className="travelLength">

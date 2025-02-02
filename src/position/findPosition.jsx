@@ -1,3 +1,6 @@
+import React from 'react';
+import './findPosition.css';
+
 const FindPosition = () => {
     return (
     <div className="positionService">
@@ -26,4 +29,4 @@ const FindPosition = () => {
 }  
 
 
-export default Position;
+export default FindPosition;

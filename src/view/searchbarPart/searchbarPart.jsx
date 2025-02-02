@@ -1,3 +1,5 @@
+import React from 'react';
+import './searchBarPart.css';
 import FindPosition from "../../position/findPosition";
 import FormOfTravel from "../../formOfTravel/formOfTravel";
 import TravelLength from "../../travelLength/travelLength";
@@ -13,25 +15,15 @@ const SearchbarPart = () => {
                     alt="Wandern im Wald 01" 
                 />
                 <div className="searchbarWithFilters">
-                    <Anreisezeit
-                        Anreisezeit={Anreisezeit}
-                    />
-                    <findPosition
-                        Position={Position}
-                    />      
-                    <formOfTravel
-                        formOfTravel={formOfTravel}
-                    />
-                    <travelLength 
-                        travelLength={travelLength}
-                    />
-                    <vacationLength 
-                        vacationLength={vacationLength}
-                    />
+                    <Anreisezeit />
+                    <FindPosition />      
+                    <FormOfTravel/>
+                    <TravelLength />
+                    <VacationLength/>
                     <button className="searchButton">Suchen</button>
                 </div>
                 </div>
-                </div>
+        </div>
             )
     }
 
