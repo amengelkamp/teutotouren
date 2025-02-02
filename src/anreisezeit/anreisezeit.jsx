@@ -3,8 +3,14 @@ import './anreisezeit.css';
 
 const Anreisezeit = () => {
     return (
-        const [hours, setHours] = useState(""); //State für Ankunftszeit in Stunden 
-
+        <div className="anreiseZeit">
+            <input 
+                type="text"
+                placeholder="Max. Anreisezeit in Stunden"
+                className="anreiseZeitInput"
+                />
+                  <button className="CounterUp">{"\u2191"}</button>
+                  <button className="CounterDown">{"\u2193"}</button></div>
     )
 }
 
