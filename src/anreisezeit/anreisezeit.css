@@ -1,0 +1,7 @@
+.anreisezeit {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(250, 250, 250);
+    border-radius: 8px;
+    height: 70px;
+}

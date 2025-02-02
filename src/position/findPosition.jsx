@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './findPosition.css';
 
 const FindPosition = () => {
@@ -18,7 +18,6 @@ const FindPosition = () => {
       const [position, setPosition] = useState(""); //State für Position
         
         const setPosition = () => {
-          console.log("Tach");
           fetch('/api/position') // api for the get request
           .then(response => response.json())
           .then(data => console.log(data));

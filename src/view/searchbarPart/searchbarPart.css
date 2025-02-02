@@ -52,15 +52,10 @@
     color: white; 
   }
   
-  .vacationLength, .travelLength {
-    display: flex;
-    flex-direction: row;
-  }
+
   
   
   
-   .publicTransportation, .byCar {
-    width: 60px;
-  }
+
   
   

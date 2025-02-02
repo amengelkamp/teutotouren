@@ -1,5 +1,5 @@
-import React from 'react';
-import './searchBarPart.css';
+import React, {useState} from 'react';
+import './searchbarPart.css';
 import FindPosition from "../../position/findPosition";
 import FormOfTravel from "../../formOfTravel/formOfTravel";
 import TravelLength from "../../travelLength/travelLength";
@@ -23,7 +23,6 @@ const SearchbarPart = () => {
                     <button className="searchButton">Suchen</button>
                 </div>
                 </div>
-        </div>
             )
     }
 
