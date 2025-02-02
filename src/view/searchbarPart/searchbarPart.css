@@ -1,0 +1,66 @@
+/*= image-container*/
+.searchbarPart {
+    display: block;
+    position: relative;
+    display: inline-block;
+    align-items: center;
+    background-image: url('./wandernImWald01');
+    background-size: cover;
+    background-position:center;
+    width: 100%;
+    height: 500px;
+      flex-direction: column;
+  }
+  
+  /*= image-container img */
+  .wandernImWald01 {
+    width: 100%;
+    height: 500px;
+    border-radius: 5px;
+    /*align-items: center;
+    justify-content: center;*/
+    display: block; /* Macht das Bild zu einem Block-Element */
+    /*margin: 0 auto; Zentriert das Bild */
+  }
+  
+  
+  
+  /*= overlay-text*/
+  .searchbarWithFilters {
+    position: absolute; /*for putting it above the photo*/
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Exakte Zentrierung */
+    padding: 10px; /* Abstand innerhalb der Box */
+    background-color: green; /* Halbtransparenter Hintergrund */
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    text-align: center;
+    border-radius: 8px;
+  }
+  
+
+  
+  .searchButton {
+    background-color: rgb(109, 102, 102);
+    border-radius: 8px;
+    width: 80px;
+    font-size:17px;
+    font-weight: bold;
+    color: white; 
+  }
+  
+  .vacationLength, .travelLength {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  
+  
+   .publicTransportation, .byCar {
+    width: 60px;
+  }
+  
+  
