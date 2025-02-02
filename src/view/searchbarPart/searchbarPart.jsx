@@ -3,7 +3,6 @@ import './searchbarPart.css';
 import FindPosition from "../../position/findPosition";
 import FormOfTravel from "../../formOfTravel/formOfTravel";
 import TravelLength from "../../travelLength/travelLength";
-import VacationLength from "../../vacationLength/vacationLength";
 import Anreisezeit from "../../anreisezeit/anreisezeit";
 
 const SearchbarPart = () => {
@@ -19,7 +18,6 @@ const SearchbarPart = () => {
                     <FormOfTravel/>
                     <Anreisezeit />
                     <TravelLength />
-                    <VacationLength/>
                     <button className="searchButton">Suchen</button>
                 </div>
                 </div>

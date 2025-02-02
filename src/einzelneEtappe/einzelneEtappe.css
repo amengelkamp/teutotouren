@@ -1,0 +1,21 @@
+.einzelneEtappe {
+    display: flex;
+    flex-direction: column;  
+}
+
+.etappenName {
+
+}
+
+.etappenBildPlusDescription {
+    display: flex;
+    flex-direction: row; 
+}
+
+.etappenBild {
+
+}
+
+.etappenDescription {
+    
+}
