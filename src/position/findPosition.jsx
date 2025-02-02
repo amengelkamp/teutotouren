@@ -12,14 +12,16 @@ const FindPosition = () => {
     
     return (
     <div className="positionService">
-          <input 
-          type="text"
-          placeholder="Dein Standort"
-          className="positionInput"
-          value={position} //hier fließt der State rein 
-          readOnly
-          />
-          <button className="positionSearch" onClick={fetchPosition}>📍</button>
+      <div className="positionField" >
+        <input 
+        type="text"
+        placeholder="Dein Standort"
+        className="positionInput"
+        value={position} //hier fließt der State rein 
+        readOnly
+        />
+        <button className="positionSearch" onClick={fetchPosition}>📍</button>
+      </div>
     </div>
     );
 }  

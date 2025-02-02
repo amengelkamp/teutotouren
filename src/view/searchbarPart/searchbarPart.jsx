@@ -15,9 +15,9 @@ const SearchbarPart = () => {
                     alt="Wandern im Wald 01" 
                 />
                 <div className="searchbarWithFilters">
-                    <Anreisezeit />
                     <FindPosition />      
                     <FormOfTravel/>
+                    <Anreisezeit />
                     <TravelLength />
                     <VacationLength/>
                     <button className="searchButton">Suchen</button>
