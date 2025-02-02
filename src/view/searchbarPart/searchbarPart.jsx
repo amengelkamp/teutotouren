@@ -1,9 +1,8 @@
-import position from "../../position/position";
-import anreisezeit from "../../anreisezeit/anreisezeit";
-import setLocation from "./setLocation/setLocation";
-import formOfTravel from "../../formOfTravel/formOfTravel";
-import travelLength from "../../travelLength/travelLength";
-import vacationLength from "../../vacationLength/vacationLength";
+import FindPosition from "../../position/findPosition";
+import FormOfTravel from "../../formOfTravel/formOfTravel";
+import TravelLength from "../../travelLength/travelLength";
+import VacationLength from "../../vacationLength/vacationLength";
+import Anreisezeit from "../../anreisezeit/anreisezeit";
 
 const SearchbarPart = () => {
     return (
@@ -14,10 +13,10 @@ const SearchbarPart = () => {
                     alt="Wandern im Wald 01" 
                 />
                 <div className="searchbarWithFilters">
-                    <anreisezeit
+                    <Anreisezeit
                         Anreisezeit={Anreisezeit}
                     />
-                    <position
+                    <findPosition
                         Position={Position}
                     />      
                     <formOfTravel

@@ -3,7 +3,7 @@ const [location, setLocation] = useState(""); //State für den Standort
 const [error, setError] = useState(""); //Abfangen von Fehlern wenn diese eintreten
 
 
-const handleGetLocation = () => {
+const HandleGetLocation = () => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -27,4 +27,4 @@ const handleGetLocation = () => {
     }
 };
 
-export default setLocation;
+export default HandleGetLocation;

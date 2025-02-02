@@ -1,4 +1,4 @@
-const Position = () => {
+const FindPosition = () => {
     return (
     <div className="positionService">
                   <input 
