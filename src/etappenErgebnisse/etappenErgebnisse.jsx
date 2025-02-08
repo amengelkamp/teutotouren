@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import './einzelneEtappe.css';
+import './etappenErgebnisse.css';
 
-const EinzelneEtappe = () => {
+const EtappenErgebnisse = () => {
 
 
 
@@ -9,7 +9,7 @@ const EinzelneEtappe = () => {
 
 
     return (
-        <div className='einzelneEtappe'>
+        <div className='einzelneEtappe'>einzelneEtappe
             <div className='etappenName'>etappenName</div>
             <div className='etappenBildPlusDescription'>etappenBildPlusDescription</div>
                 <div className='etappenBild'>etappenBild</div>

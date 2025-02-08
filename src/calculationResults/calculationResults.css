@@ -1,5 +1,7 @@
 .CalculationResultsPart {
     display: flex;
     flex-direction: row; 
-    background-color: #75e078;
+    background-color: #A5F0C5;
+    justify-content: space-evenly;
+    font-family: Space Grotesk;
 }

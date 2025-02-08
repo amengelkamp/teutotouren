@@ -12,7 +12,6 @@ const EtappenPart = () => {
 
     return (
         <div className='etappenPart'>
-           <CalculationResults />
             <EinzelneEtappe />
         </div>
     );

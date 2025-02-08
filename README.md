@@ -1,13 +1,14 @@
 [x] Komponente rauslösen und verlinken 
 [] Komponent für trail-Ergebnisse anlegen
     [] HTML & CSS dafür bauen
+    
         []routesPart
             []etappenPart 
-                [] calculationResults
-                    - Position des Suchenden 
-                    - Reiseart
-                    - Anreisezeit berechnet für Startpunkt der ersten Etappe
-                    - Reisedauer/Etappenanzahl in Tagen
+            [] calculationResults
+                - Position des Suchenden 
+                - Reiseart
+                - Anreisezeit berechnet für Startpunkt der ersten Etappe
+                - Reisedauer/Etappenanzahl in Tagen
 
                 []einzelneEtappe
                     [] etappenName
@@ -23,3 +24,26 @@
 []
 [] 
 []
+
+
+# Struktur 
+
+App.jsx 
+        SearchbarPart
+            FindPosition     
+            FormOfTravel
+            Anreisezeit
+            TravelLength
+        CalculationResults
+            gewaehltePositionAnzeige
+            gewaehlteReiseArtAnzeige'
+            berechneteAnreisezeitAnzeige
+            gewaehlteEtappentage
+        RoutesPart
+            EtappenPart
+                EinzelneEtappe
+                    einzelneEtappw
+                    etappenName
+                    etappenBildPlusDescription
+                    etappenBild
+                    etappenDescription
