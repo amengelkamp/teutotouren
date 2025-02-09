@@ -15,7 +15,7 @@ def insert_image_in_all_rows(image_path):
     cur = con.cursor()
 
 
-    # Führe das SQL-Statement aus, um das Bild in alle Zeilen zu speichern
+    # ausführen von SQL Statement
     cur.execute(sql, (image_data,))
 
     # Änderungen speichern und Verbindung schließen

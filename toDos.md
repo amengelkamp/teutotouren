@@ -20,8 +20,7 @@
     [] Fotos zu Etappen in Datenbank als BLOB hinzufügen
         [x] Spalte hinzufügen "image01"
         [x] Beispielfoto für jede Strecke hinzufügen via Python Skript
-
-    [] Ziel: Unteren Bereich bei "Suchen" ohne Filter komplett anzeigen lassen mit Fotos und Etappen
+        [] Ziel: Unteren Bereich bei "Suchen" ohne Filter komplett anzeigen lassen mit Fotos und Etappen
 []
 []
 [] 
