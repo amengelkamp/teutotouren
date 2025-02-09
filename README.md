@@ -10,7 +10,7 @@
                 - Anreisezeit berechnet für Startpunkt der ersten Etappe
                 - Reisedauer/Etappenanzahl in Tagen
 
-                []einzelneEtappe
+                []etappenErgebnisse
                     [] etappenName
                     [] etappenBild
                     [] etappenDescription
