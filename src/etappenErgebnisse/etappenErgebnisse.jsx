@@ -27,4 +27,4 @@ const EtappenErgebnisse = () => {
 
 
 
-export default EinzelneEtappe;
+export default EtappenErgebnisse;
