@@ -1,7 +1,7 @@
 import time
-from flask import Flask
+from flask import Flask, Response
+import json
 import sqlite3
-
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ def get_current_time():
 
 @app.route('/position')
 def get_current_position():
-    return {'position': 'Steinhagen',}
+    return {'position': 'Steinhagen'}
 
 @app.route("/trail")
 def get_trails():
@@ -19,8 +19,35 @@ def get_trails():
 
 @app.route("/allTrails")
 def get_all_trails():
-    con = sqlite3.connect("../SQL/teutotourenDatabase.db")
-    cur = con.cursor()
-    res = cur.execute("SELECT * FROM etappen")
-    all = res.fetchall()
-    return all
+    try: 
+        con = sqlite3.connect("../SQL/teutotourenDatabase.db")
+        con.row_factory = sqlite3.Row  # Zugriff auf Spalten per Namen
+        cur = con.cursor()
+
+        # Daten aus der Tabelle holen
+        res = cur.execute("SELECT * FROM etappen")
+        rows = res.fetchall()
+        print(rows)
+        con.close()  # Verbindung schließen
+
+        # Daten in eine Liste von Dictionaries umwandeln
+        data = [
+            {
+                "id": row["id"],
+                "name": row["name"],
+                "etappe_startpunkt": row["etappe_startpunkt"],
+                "etappe_endpunkt": row["etappe_endpunkt"],
+                "dauer": row["dauer"],
+                "hoehenmeter": row["hoehenmeter"]
+            }
+        for row in rows
+        ]
+
+        # JSON mit UTF-8 und richtigen Umlauten
+        json_data = json.dumps(data, ensure_ascii=False)
+
+        return Response(json_data, content_type="application/json; charset=utf-8")
+    
+    except sqlite3.Error as e:
+        return jsonify({"error": str(e)}), 500  # Fehler-Handling mit HTTP 500
+
