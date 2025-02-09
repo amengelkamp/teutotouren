@@ -41,8 +41,8 @@ App.jsx
             gewaehlteEtappentage
         RoutesPart
             EtappenPart
-                EinzelneEtappe
-                    einzelneEtappw
+                EtappenErgebnisse
+                    einzelneEtappe
                     etappenName
                     etappenBildPlusDescription
                     etappenBild

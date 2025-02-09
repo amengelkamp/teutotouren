@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './etappenPart.css';
-import EinzelneEtappe from '../einzelneEtappe/einzelneEtappe';
+import EtappenErgebnisse from '../etappenErgebnisse/etappenErgebnisse'; 
 import CalculationResults from '../calculationResults/calculationResults';
 
 const EtappenPart = () => {
@@ -12,7 +12,7 @@ const EtappenPart = () => {
 
     return (
         <div className='etappenPart'>
-            <EinzelneEtappe />
+            <EtappenErgebnisse />
         </div>
     );
 }
