@@ -2,8 +2,11 @@ import time
 from flask import Flask, Response
 import json
 import sqlite3
+from flask_cors import CORS  # Hier wird Flask-CORS importiert, damit das frontend auf den BE Port zugreifen kann
+
 
 app = Flask(__name__)
+CORS(app)  # aktiviert CORS für alle Routen
 
 @app.route('/time')
 def get_current_time():
