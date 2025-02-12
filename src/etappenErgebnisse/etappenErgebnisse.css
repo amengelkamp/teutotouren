@@ -15,6 +15,9 @@
     margin: 26px;
 }
 
+.LoadingAnnouncement {
+    font-size: 40px; 
+}
 .etappenName {
     color: white;
     justify-self: flex-start;

@@ -36,7 +36,7 @@ useEffect(() => {
 
             {etappen.length == 0 ? (
                 //Wenn Ladevorgang noch laufend
-                <p>Deine möglichen Etappen werden geladen...</p>
+                <div className='LoadingAnnouncement'>Die Etappen werden geladen... </div>
             ) : (
                 etappen.map((etappe) => (
                     <div key={etappe.id} className='einzelneEtappe'>
