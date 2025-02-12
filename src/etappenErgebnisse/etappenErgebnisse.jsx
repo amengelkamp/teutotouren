@@ -46,8 +46,8 @@ useEffect(() => {
                             <div className='etappenDescription'>
                                 <div className='etappenStartpunkt'>Etappenstart: {etappe.etappe_startpunkt}</div>
                                 <div className='etappenEndpunkt'>Etappenende: {etappe.etappe_endpunkt}</div>
-                                <div className='etappenDauer'>Dauer der Etappe: {etappe.dauer}</div>
-                                <div className='etappenHoehenmeter'>Höhenmeter gesamt: {etappe.hoehenmeter}</div> 
+                                <div className='etappenDauer'>Dauer der Etappe: {etappe.dauer} Stunden</div>
+                                <div className='etappenHoehenmeter'>Höhenmeter gesamt: {etappe.hoehenmeter} Meter</div> 
                             </div>
                             </div>                          
                     </div>
