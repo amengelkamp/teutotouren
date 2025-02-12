@@ -1,6 +1,17 @@
-.einzelneEtappe {
+.etappenListe {
     display: flex;
     flex-direction: column;  
+    background-color: #184D47; 
+
+}
+
+.einzelneEtappe {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border-color: white;
+    background-color: #00917C;
+    margin: 26px;
 }
 
 .etappenName {
@@ -17,5 +28,22 @@
 }
 
 .etappenDescription {
-    
+    display: flex;
+    flex-direction: column; 
+}
+
+.etappenStartpunkt {
+ 
+}
+
+.etappenEndpunkt {
+ 
+}
+
+.etappenDauer {
+ 
+}
+
+.etappenHoehenmeter {
+ 
 }
