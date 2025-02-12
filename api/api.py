@@ -2,6 +2,8 @@ import time
 from flask import Flask, Response
 import json
 import sqlite3
+import base64
+
 from flask_cors import CORS  # Hier wird Flask-CORS importiert, damit das frontend auf den BE Port zugreifen kann
 
 
@@ -41,7 +43,8 @@ def get_all_trails():
                 "etappe_startpunkt": row["etappe_startpunkt"],
                 "etappe_endpunkt": row["etappe_endpunkt"],
                 "dauer": row["dauer"],
-                "hoehenmeter": row["hoehenmeter"]
+                "image1": base64.b64encode(row["image1"]).decode("utf-8") if row["image1"] else None,
+                "hoehenmeter": row["hoehenmeter"],
             }
         for row in rows
         ]
