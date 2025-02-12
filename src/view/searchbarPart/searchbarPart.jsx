@@ -5,7 +5,7 @@ import FormOfTravel from "../../formOfTravel/formOfTravel";
 import TravelLength from "../../travelLength/travelLength";
 import Anreisezeit from "../../anreisezeit/anreisezeit";
 
-const SearchbarPart = () => {
+const SearchbarPart = ({ onSearchForAllRoutes}) => {
     return (
         <div className="searchbarPart">
                 <img 
@@ -18,7 +18,7 @@ const SearchbarPart = () => {
                     <FormOfTravel/>
                     <Anreisezeit />
                     <TravelLength />
-                    <button className="searchButton">Suchen</button>
+                    <button onClick={onSearchForAllRoutes} className="searchButton">Suchen</button>
                 </div>
                 </div>
             )

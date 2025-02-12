@@ -3,6 +3,7 @@
     display: block;
     position: relative;
     display: inline-block;
+
     align-items: center;
     background-image: url('./wandernImWald01');
     background-size: cover;

@@ -9,9 +9,9 @@ body {
 
 
 
- *{
+ /*{
     border: 1px solid rgb(19, 18, 18);
-}  
+}  */
 
 .teutotourenWebsite {
   display: flex;

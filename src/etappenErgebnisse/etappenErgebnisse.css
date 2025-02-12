@@ -2,48 +2,52 @@
     display: flex;
     flex-direction: column;  
     background-color: #184D47; 
-
+    font-family: Space Grotesk;
 }
 
 .einzelneEtappe {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+    border-width: 2px;
     border-color: white;
     background-color: #00917C;
     margin: 26px;
 }
 
 .etappenName {
-
+    color: white;
+    justify-self: flex-start;
+    align-self: flex-start;
+    margin: 10px;
+    font-size: 20px; 
+    font-weight: bolder;
 }
 
 .etappenBildPlusDescription {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    margin: 10px;
 }
 
 .etappenBild {
-
+    height: 200px;
+    width: 290px;
+    object-fit: cover; 
+    border-radius: 5px;
 }
 
 .etappenDescription {
     display: flex;
     flex-direction: column; 
+    padding: 0px;
+    font-size: 20px;
+    align-items: flex-start;
 }
 
-.etappenStartpunkt {
- 
+.etappenStartpunkt, .etappenEndpunkt, .etappenDauer, .etappenHoehenmeter{
+    padding: 10px;
 }
 
-.etappenEndpunkt {
- 
-}
-
-.etappenDauer {
- 
-}
-
-.etappenHoehenmeter {
- 
-}

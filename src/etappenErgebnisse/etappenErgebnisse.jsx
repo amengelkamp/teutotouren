@@ -40,15 +40,16 @@ useEffect(() => {
             ) : (
                 etappen.map((etappe) => (
                     <div key={etappe.id} className='einzelneEtappe'>
-                    <div className='etappenName'>{etappe.name}</div>
-                    <div className='etappenBildPlusDescription'></div>
-                        <div className='etappenBild'>{etappe.image1}Bild</div>
-                        <div className='etappenDescription'>
-                            <div className='etappenStartpunkt'>{etappe.etappe_startpunkt}</div>
-                            <div className='etappenEndpunkt'>{etappe.etappe_endpunkt}</div>
-                            <div className='etappenDauer'>{etappe.dauer}</div>
-                            <div className='etappenHoehenmeter'>{etappe.hoehenmeter}</div> 
-                        </div>                         
+                        <div className='etappenName'>{etappe.name}</div>
+                        <div className='etappenBildPlusDescription'>
+                            <img className='etappenBild' src={`data:image/jpeg;base64,${etappe.image1}`} alt={'Bild von ${etappe.name}'}/>
+                            <div className='etappenDescription'>
+                                <div className='etappenStartpunkt'>Etappenstart: {etappe.etappe_startpunkt}</div>
+                                <div className='etappenEndpunkt'>Etappenende: {etappe.etappe_endpunkt}</div>
+                                <div className='etappenDauer'>Dauer der Etappe: {etappe.dauer}</div>
+                                <div className='etappenHoehenmeter'>Höhenmeter gesamt: {etappe.hoehenmeter}</div> 
+                            </div>
+                            </div>                          
                     </div>
                 )))
             }
