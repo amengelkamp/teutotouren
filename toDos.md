@@ -28,4 +28,4 @@ Auf ein Klicken des Suchbuttons hin ohne Angabe von Filtern, werden alle Etappen
 [] Ermittelbarkeit durch Valhalla API nutzbar machen 
 
 [] 
-[]
+[]  
