@@ -4,6 +4,7 @@ import FindPosition from "../../position/findPosition";
 import FormOfTravel from "../../formOfTravel/formOfTravel";
 import TravelLength from "../../travelLength/travelLength";
 import Anreisezeit from "../../anreisezeit/anreisezeit";
+//import SearchButton from '../../searchButton/searchButton';
 
 const SearchbarPart = ({ onSearchForAllRoutes}) => {
     return (

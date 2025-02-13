@@ -56,4 +56,12 @@ def get_all_trails():
     
     except sqlite3.Error as e:
         return jsonify({"error": str(e)}), 500  # Fehler-Handling mit HTTP 500
+    
 
+
+
+#@app.route("/findPosition")
+#def get_position():
+#        try:  
+        
+             
