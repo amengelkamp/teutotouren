@@ -14,7 +14,22 @@
 
 .headerLeft {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.headerLogoBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.logoSlogan {
+    font-size: 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.2px;
+    line-height: 1;
 }
 
 .teutotourenLogo {

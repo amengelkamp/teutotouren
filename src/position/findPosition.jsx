@@ -19,7 +19,9 @@ const FindPosition = () => {
                     );
                     const data = await res.json();
                     const a = data.address;
-                    const label = a.city || a.town || a.village || a.municipality || data.display_name;
+                    const street = [a.road, a.house_number].filter(Boolean).join(' ');
+                    const city = a.city || a.town || a.village || a.municipality || '';
+                    const label = [street, city].filter(Boolean).join(', ') || data.display_name;
                     setPosition(label);
                 } catch {
                     setPosition(`${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`);

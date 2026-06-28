@@ -5,11 +5,13 @@ const Header = () => {
     return (
         <div className="header">
             <div className="headerLeft">
-                <div className="teutotourenLogo">
-                    teutotouren<span className="logoDomain">.de</span>
+                <div className="headerLogoBlock">
+                    <div className="teutotourenLogo">
+                        teutotouren<span className="logoDomain">.de</span>
+                    </div>
+                    <div className="logoSlogan">Wir planen. Du wanderst.</div>
                 </div>
             </div>
-            <div className="headerTagline">Wandern im Teutoburger Wald</div>
         </div>
     );
 };
