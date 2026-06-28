@@ -103,7 +103,7 @@ def get_all_trails():
         con = get_db()
         cur = con.cursor()
 
-        query = "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis, region FROM etappen WHERE 1=1"
+        query = "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, hoehenmeter_abstieg, schwierigkeit, image_path, gpx_path, oepnv_hinweis, region, laenge_km, typ FROM etappen WHERE 1=1"
         params = []
 
         if dauer_max is not None:
@@ -134,6 +134,9 @@ def get_all_trails():
                 "gpx_path": row["gpx_path"],
                 "oepnv_hinweis": row["oepnv_hinweis"],
                 "region": row["region"],
+                "laenge_km": row["laenge_km"],
+                "typ": row["typ"],
+                "hoehenmeter_abstieg": row["hoehenmeter_abstieg"],
             }
             for row in rows
         ]
