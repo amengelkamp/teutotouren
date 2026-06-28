@@ -8,7 +8,7 @@ const REGIONEN = [
     { value: 'Eifel',            label: 'Eifel',            color: '#2c4a6e', image: '/images/region_eifel.jpg' },
     { value: 'Harz',             label: 'Harz',             color: '#4a4a6e', image: '/images/region_harz.jpg' },
     { value: 'Sauerland',        label: 'Sauerland',        color: '#2e5c4a', image: '/images/region_sauerland.jpg' },
-    { value: 'Rheinsteig',       label: 'Rheinsteig',       color: '#1e4a5c', image: null },
+    { value: 'Rheinsteig',       label: 'Rheinsteig',       color: '#1e4a5c', image: '/images/region_rheinsteig.jpg' },
 ];
 
 const RegionShowcase = ({ onRegionSelect }) => {
