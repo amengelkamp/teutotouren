@@ -30,9 +30,6 @@ __pycache__
 *.jpg
 *.jpeg
 *.png
-!public/images/*.jpg
-!public/images/*.jpeg
-!public/images/*.png
 .env
 api/.env
 
