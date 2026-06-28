@@ -114,7 +114,7 @@ const EtappenErgebnisse = ({ filters }) => {
                                         <span className="cardChip">🚏 {etappe.anreiseMinuten} Min. Anreise</span>
                                     )}
                                 </div>
-                                {etappe.oepnv_hinweis && (
+                                {etappe.oepnv_hinweis && filters.mode === 'bahn' && (
                                     <div className="cardOepnv">🚌 {etappe.oepnv_hinweis}</div>
                                 )}
                                 <button className="cardCta" onClick={() => navigate(`/etappe/${etappe.id}`)}>Details ansehen →</button>
