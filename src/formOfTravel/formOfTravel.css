@@ -3,29 +3,34 @@
     flex-direction: row;
     height: 52px;
     border: 1.5px solid #e8e8e8;
-    border-radius: 12px;
+    border-radius: 100px;
     overflow: hidden;
-    background: #f7f7f7;
+    background: white;
     transition: border-color 0.18s;
+    width: fit-content;
 }
 
 .segmentedControl:hover {
-    border-color: #d0d0d0;
+    border-color: #c8c8c8;
+}
+
+.segmentedControl.hasActive {
+    border-color: #184D47;
 }
 
 .segmentBtn {
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 100%;
     border: none;
     background: transparent;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: 'Inter', sans-serif;
-    color: #666;
+    color: #999;
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s;
-    padding: 0 14px;
-    white-space: nowrap;
-    letter-spacing: 0.1px;
+    padding: 0;
+    flex-shrink: 0;
 }
 
 .segmentBtn:first-child {
@@ -33,12 +38,15 @@
 }
 
 .segmentBtn:hover:not(.aktiv) {
-    background: #efefef;
-    color: #333;
+    background: #f4f4f4;
+    color: #444;
 }
 
 .segmentBtn.aktiv {
     background-color: #184D47;
     color: white;
-    font-weight: 600;
+}
+
+.segmentedControl.hasActive .segmentBtn:first-child {
+    border-right-color: #184D47;
 }
