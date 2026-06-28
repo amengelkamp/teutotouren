@@ -26,8 +26,8 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                     <div className="heroOverlay" />
                 </div>
                 <div className="heroContent">
-                    <h1 className="heroHeadline">Wandern im Teutoburger Wald —<br />passend zu dir.</h1>
-                    <p className="heroSubtitle">Nur offizielle Wege. Ausgeschildert.<br />Handy wegstecken, Kopf freibekommen.</p>
+                    <h1 className="heroHeadline">Urlaub zuhause —<br />dein nächster Wandertag.</h1>
+                    <p className="heroSubtitle">Offizielle Wege. Ausgeschildert. In deiner Nähe.<br />Handy wegstecken, Kopf freibekommen.</p>
                 </div>
                 <div className="searchCard">
                     <div className="searchRow">

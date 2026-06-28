@@ -14,9 +14,9 @@ const Header = () => {
             <div className="headerLeft">
                 <div className="headerLogoBlock">
                     <div className="teutotourenLogo">
-                        teutotouren<span className="logoDomain">.de</span>
+                        heimattouren<span className="logoDomain">.de</span>
                     </div>
-                    <div className="logoSlogan">Wir planen. Du wanderst.</div>
+                    <div className="logoSlogan">Urlaub zuhause.</div>
                 </div>
             </div>
             <div className="headerNav">

@@ -1,0 +1,96 @@
+.regionShowcase {
+    margin: 48px 10%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.regionShowcaseHeader {
+    margin-bottom: 20px;
+}
+
+.regionShowcaseTitle {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 4px 0;
+}
+
+.regionShowcaseSubtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #757575;
+    margin: 0;
+}
+
+/* 4 Spalten: Reihe 1 = 2 Kacheln à 2 Spalten, Reihe 2 = 4 Kacheln à 1 Spalte */
+.regionGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 336px 240px;
+    gap: 10px;
+}
+
+.regionCard:nth-child(1) { grid-column: span 2; }
+.regionCard:nth-child(2) { grid-column: span 2; }
+
+.regionCard {
+    position: relative;
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    text-align: left;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.regionCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+.regionCardPlaceholder {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    inset: 0;
+}
+
+.regionCardContent {
+    position: absolute;
+    bottom: 14px;
+    left: 16px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.regionCardLabel {
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    line-height: 1.2;
+}
+
+.regionCardSub {
+    color: rgba(255,255,255,0.8);
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 768px) {
+    .regionGrid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 160px 140px 140px;
+    }
+
+    .regionCard:nth-child(1) { grid-column: span 2; }
+    .regionCard:nth-child(2) { grid-column: span 1; }
+}

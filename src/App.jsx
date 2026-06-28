@@ -5,6 +5,7 @@ import SearchbarPart from './view/searchbarPart/searchbarPart';
 import RoutesPart from './view/routesPart/routesPart';
 import Header from './view/header/header';
 import EtappeDetail from './etappeDetail/etappeDetail';
+import RegionShowcase from './regionShowcase/regionShowcase';
 
 function Startseite() {
     const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'bahn', anreisezeit: '', region: '' });
@@ -18,6 +19,12 @@ function Startseite() {
         setActiveFilters({ ...filters, userCoords });
     };
 
+    const handleRegionSelect = (region) => {
+        const updated = { ...filters, region };
+        setFilters(updated);
+        setActiveFilters({ ...updated, userCoords: null });
+    };
+
     return (
         <>
             <SearchbarPart
@@ -25,6 +32,9 @@ function Startseite() {
                 onFilterChange={handleFilterChange}
                 onSearch={handleSearch}
             />
+            {activeFilters === null && (
+                <RegionShowcase onRegionSelect={handleRegionSelect} />
+            )}
             {activeFilters !== null && <RoutesPart filters={activeFilters} />}
         </>
     );
