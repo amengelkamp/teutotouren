@@ -67,8 +67,7 @@
 
 - [ ] HERE API-Key besorgen (developer.here.com, kostenlos, keine Kreditkarte)
 - [ ] Backend: `/traveltime`-Endpunkt — nimmt Nutzerkoordinaten + Etappen-Startpunkt + Reiseart
-- [ ] HERE Routing API für Auto, Fuß, Rad → Fahrzeit in Minuten
-- [ ] HERE Routing API für Bahn/ÖPNV → Fahrzeit in Minuten
+- [ ] HERE Routing API für alle Reisearten (Auto, Fuß, Rad, Bahn/ÖPNV) → Fahrzeit in Minuten
 - [ ] Frontend: Anreisezeit-Filter nutzt echte berechnete Zeit statt manuelle Auswahl
 - [ ] Etappen filtern: nur anzeigen wenn Anreisezeit ≤ gewähltem Maximum
 
