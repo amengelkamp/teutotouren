@@ -63,12 +63,11 @@
 
 ## Phase 3 — Anreisezeitberechnung
 
-**APIs:** ORS (Auto/Fuß, kostenlos) + HERE Routing (Bahn/ÖPNV, 250k Req/Monat kostenlos, keine Kreditkarte)
+**API:** HERE Routing API (Auto/Fuß/Rad/ÖPNV, 250k Req/Monat kostenlos, keine Kreditkarte)
 
-- [ ] ORS API-Key besorgen (openrouteservice.org, kostenlos)
 - [ ] HERE API-Key besorgen (developer.here.com, kostenlos, keine Kreditkarte)
 - [ ] Backend: `/traveltime`-Endpunkt — nimmt Nutzerkoordinaten + Etappen-Startpunkt + Reiseart
-- [ ] ORS-Aufruf für Auto / Fußweg → Fahrzeit in Minuten
+- [ ] HERE Routing API für Auto, Fuß, Rad → Fahrzeit in Minuten
 - [ ] HERE Routing API für Bahn/ÖPNV → Fahrzeit in Minuten
 - [ ] Frontend: Anreisezeit-Filter nutzt echte berechnete Zeit statt manuelle Auswahl
 - [ ] Etappen filtern: nur anzeigen wenn Anreisezeit ≤ gewähltem Maximum
