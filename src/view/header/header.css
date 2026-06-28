@@ -3,13 +3,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 64px;
-    background-color: #184D47;
+    height: 76px;
+    background-color: white;
     padding: 0 32px;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
 }
 
 .headerLeft {
@@ -26,10 +26,10 @@
 .teutotourenLogo {
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    font-size: 24px;
-    color: white;
-    letter-spacing: -0.5px;
-    line-height: 1.1;
+    font-size: 36px;
+    color: #184D47;
+    letter-spacing: -1px;
+    line-height: 1.0;
 }
 
 .logoDomain {
@@ -37,11 +37,11 @@
 }
 
 .logoSlogan {
-    font-size: 10px;
+    font-size: 13px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
-    color: rgba(255,255,255,0.48);
-    letter-spacing: 0.2px;
+    color: #184D47;
+    letter-spacing: 0.1px;
 }
 
 /* ── Nav buttons ── */
@@ -62,13 +62,13 @@
     cursor: pointer;
     padding: 6px 12px;
     border-radius: 8px;
-    color: rgba(255,255,255,0.75);
+    color: rgba(0,0,0,0.55);
     transition: background 0.15s, color 0.15s;
 }
 
 .headerNavBtn:hover {
-    background: rgba(255,255,255,0.1);
-    color: white;
+    background: rgba(0,0,0,0.05);
+    color: #184D47;
 }
 
 .headerNavIcon svg {
