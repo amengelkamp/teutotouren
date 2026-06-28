@@ -4,7 +4,6 @@
     height: 52px;
     border: 1.5px solid #e8e8e8;
     border-radius: 12px;
-    overflow: hidden;
     background: white;
     transition: border-color 0.18s;
     width: fit-content;
@@ -19,6 +18,7 @@
 }
 
 .segmentBtn {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,6 +35,11 @@
 
 .segmentBtn:first-child {
     border-right: 1.5px solid #eaeaea;
+    border-radius: 10px 0 0 10px;
+}
+
+.segmentBtn:last-child {
+    border-radius: 0 10px 10px 0;
 }
 
 .segmentBtn:hover:not(.aktiv) {
@@ -49,4 +54,29 @@
 
 .segmentedControl.hasActive .segmentBtn:first-child {
     border-right-color: #184D47;
+}
+
+/* Tooltip */
+.segmentBtn::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1a1a1a;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 4px 8px;
+    border-radius: 6px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    z-index: 20;
+}
+
+.segmentBtn:hover::after {
+    opacity: 1;
 }

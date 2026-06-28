@@ -28,14 +28,14 @@ const FormOfTravel = ({ value = 'auto', onChange }) => {
             <button
                 className={`segmentBtn ${value === 'auto' ? 'aktiv' : ''}`}
                 onClick={() => onChange && onChange('auto')}
-                title="Auto"
+                data-label="Auto"
             >
                 <IconAuto />
             </button>
             <button
                 className={`segmentBtn ${value === 'bahn' ? 'aktiv' : ''}`}
                 onClick={() => onChange && onChange('bahn')}
-                title="Bahn"
+                data-label="Bus & Bahn"
             >
                 <IconBahn />
             </button>
