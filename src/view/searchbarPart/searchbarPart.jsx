@@ -8,16 +8,20 @@ import SchwierigkeitFilter from '../../schwierigkeitFilter/schwierigkeitFilter';
 
 const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
     return (
-        <div className="heroSection">
-            <img
-                className="heroImage"
-                src="./wandernImWald01.jpg"
-                alt="Wandern im Teutoburger Wald"
-            />
-            <div className="heroOverlay" />
-            <div className="heroContent">
-                <h1 className="heroHeadline">Wandern im Teutoburger Wald — passend zu dir.</h1>
-                <p className="heroSubtitle">Nur offizielle Wege. Ausgeschildert. Handy wegstecken, Kopf freibekommen.</p>
+        <div className="heroOuter">
+            <div className="heroSection">
+                <div className="heroImageClip">
+                    <img
+                        className="heroImage"
+                        src="./wandernImWald01_header.jpg"
+                        alt="Wandern im Teutoburger Wald"
+                    />
+                    <div className="heroOverlay" />
+                </div>
+                <div className="heroContent">
+                    <h1 className="heroHeadline">Wandern im Teutoburger Wald —<br />passend zu dir.</h1>
+                    <p className="heroSubtitle">Nur offizielle Wege. Ausgeschildert.<br />Handy wegstecken, Kopf freibekommen.</p>
+                </div>
                 <div className="searchCard">
                     <div className="searchRow">
                         <div className="searchField wide">
