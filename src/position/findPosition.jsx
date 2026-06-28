@@ -29,11 +29,13 @@ const FindPosition = () => {
                     setLoading(false);
                 }
             },
-            () => {
-                setPosition('Standort nicht verfügbar');
+            (err) => {
+                if (err.code === 1) setPosition('Zugriff verweigert — bitte Standort erlauben');
+                else if (err.code === 3) setPosition('Zeitüberschreitung — bitte nochmal versuchen');
+                else setPosition('Standort nicht verfügbar');
                 setLoading(false);
             },
-            { enableHighAccuracy: false, timeout: 4000, maximumAge: 300000 }
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
         );
     };
 
