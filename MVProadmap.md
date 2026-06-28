@@ -1,6 +1,6 @@
 # Teutotouren MVP-Roadmap
 
-**Gesamtfortschritt: 53% (25/47 Tasks abgeschlossen)**
+**Gesamtfortschritt: 57% (27/47 Tasks abgeschlossen) — Phase 2b fertig ✓**
 > Wird bei jeder Arbeitssession aktualisiert.
 
 **Zielgruppe:** Casual Day-Hiker  
@@ -50,8 +50,8 @@
 
 ### Filter-Leiste über Ergebnissen (wie booking.com)
 - [x] Horizontale Chip-Filterleiste direkt über den Ergebniskarten
-- [ ] Aktive Filter als geschlossene Chips mit X zum Entfernen
-- [ ] Ergebnisanzahl anzeigen: "9 Etappen gefunden"
+- [~] Aktive Filter als geschlossene Chips mit X zum Entfernen — bewusst gestrichen (MVP: Filter direkt sichtbar im Searchcard)
+- [x] Ergebnisanzahl anzeigen: "9 Etappen gefunden"
 
 ### Allgemein
 - [x] Responsive: Mobile-First, Cards stacken auf < 768px
