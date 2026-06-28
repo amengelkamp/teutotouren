@@ -34,6 +34,16 @@
 .regionCard:nth-child(1) { grid-column: span 2; }
 .regionCard:nth-child(2) { grid-column: span 2; }
 
+.regionCardDisabled {
+    cursor: default;
+    opacity: 0.85;
+}
+
+.regionCardDisabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
 .regionCard {
     position: relative;
     border: none;

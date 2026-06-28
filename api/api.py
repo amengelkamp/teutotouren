@@ -147,6 +147,18 @@ def get_all_trails():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/regionStats")
+def get_region_stats():
+    try:
+        con = get_db()
+        cur = con.cursor()
+        rows = cur.execute("SELECT region, COUNT(*) as count FROM etappen GROUP BY region").fetchall()
+        con.close()
+        return jsonify({row["region"]: row["count"] for row in rows})
+    except sqlite3.Error as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/trail/<int:trail_id>")
 def get_trail(trail_id):
     try:
