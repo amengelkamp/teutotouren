@@ -63,11 +63,15 @@
 
 ## Phase 3 — Anreisezeitberechnung
 
-- [ ] OpenRouteService API-Key besorgen (kostenlos)
-- [ ] `reverse-geocoding.py` → Nutzerstandort → Koordinaten
-- [ ] ORS-Aufruf: Koordinaten Nutzer → Etappen-Startpunkt → Fahrzeit
-- [ ] Reiseart (Auto / ÖPNV / Fahrrad) als Parameter übergeben
-- [ ] Ergebnis in `CalculationResults` anzeigen
+**APIs:** ORS (Auto/Fuß, kostenlos) + HERE Routing (Bahn/ÖPNV, 250k Req/Monat kostenlos, keine Kreditkarte)
+
+- [ ] ORS API-Key besorgen (openrouteservice.org, kostenlos)
+- [ ] HERE API-Key besorgen (developer.here.com, kostenlos, keine Kreditkarte)
+- [ ] Backend: `/traveltime`-Endpunkt — nimmt Nutzerkoordinaten + Etappen-Startpunkt + Reiseart
+- [ ] ORS-Aufruf für Auto / Fußweg → Fahrzeit in Minuten
+- [ ] HERE Routing API für Bahn/ÖPNV → Fahrzeit in Minuten
+- [ ] Frontend: Anreisezeit-Filter nutzt echte berechnete Zeit statt manuelle Auswahl
+- [ ] Etappen filtern: nur anzeigen wenn Anreisezeit ≤ gewähltem Maximum
 
 ---
 
