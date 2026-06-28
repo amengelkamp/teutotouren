@@ -9,6 +9,7 @@ import RegionFilter from '../../regionFilter/regionFilter';
 
 const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
     const [userCoords, setUserCoords] = useState(null);
+    const [erweiterteOffen, setErweiterteOffen] = useState(false);
 
     const handleSearch = () => {
         onSearch(userCoords);
@@ -55,29 +56,52 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                             Suchen
                         </button>
                     </div>
-                    <div className="searchDivider" />
-                    <div className="filterRow">
-                        <div className="filterField">
-                            <span className="filterLabel">Max. Etappendauer</span>
-                            <DauerFilter
-                                value={filters.dauerMax}
-                                onChange={(val) => onFilterChange('dauerMax', val)}
-                            />
+
+                    <div className={`filterCollapse${erweiterteOffen ? ' offen' : ''}`}>
+                        <div className="filterCollapseInner">
+                            <div className="filterRow">
+                                <div className="filterField">
+                                    <span className="filterLabel">Max. Etappendauer</span>
+                                    <DauerFilter
+                                        value={filters.dauerMax}
+                                        onChange={(val) => onFilterChange('dauerMax', val)}
+                                    />
+                                </div>
+                                <div className="filterField">
+                                    <span className="filterLabel">Schwierigkeit</span>
+                                    <SchwierigkeitFilter
+                                        value={filters.schwierigkeit}
+                                        onChange={(val) => onFilterChange('schwierigkeit', val)}
+                                    />
+                                </div>
+                                <div className="filterField">
+                                    <span className="filterLabel">Region</span>
+                                    <RegionFilter
+                                        value={filters.region}
+                                        onChange={(val) => onFilterChange('region', val)}
+                                    />
+                                </div>
+                            </div>
                         </div>
-                        <div className="filterField">
-                            <span className="filterLabel">Schwierigkeit</span>
-                            <SchwierigkeitFilter
-                                value={filters.schwierigkeit}
-                                onChange={(val) => onFilterChange('schwierigkeit', val)}
-                            />
-                        </div>
-                        <div className="filterField">
-                            <span className="filterLabel">Region</span>
-                            <RegionFilter
-                                value={filters.region}
-                                onChange={(val) => onFilterChange('region', val)}
-                            />
-                        </div>
+                    </div>
+
+                    <div className="searchCardFooter">
+                        <div className="searchCardFooterLine" />
+                        <button
+                            className="erweitertToggle"
+                            onClick={() => setErweiterteOffen((v) => !v)}
+                        >
+                            <svg
+                                className={`erweitertChevron${erweiterteOffen ? ' gedreht' : ''}`}
+                                width="13" height="13"
+                                viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" strokeWidth="2.5"
+                                strokeLinecap="round" strokeLinejoin="round"
+                            >
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                            {erweiterteOffen ? 'Erweiterte Suchoptionen ausblenden' : 'Erweiterte Suchoptionen'}
+                        </button>
                     </div>
                 </div>
             </div>
