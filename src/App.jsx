@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 import SearchbarPart from './view/searchbarPart/searchbarPart';
 import RoutesPart from './view/routesPart/routesPart';
@@ -40,16 +40,30 @@ function Startseite() {
     );
 }
 
+function AppInner() {
+    const [startseiteKey, setStartseiteKey] = useState(0);
+    const navigate = useNavigate();
+
+    const handleHome = () => {
+        setStartseiteKey((k) => k + 1);
+        navigate('/');
+    };
+
+    return (
+        <div className="teutotourenWebsite">
+            <Header onHome={handleHome} />
+            <Routes>
+                <Route path="/" element={<Startseite key={startseiteKey} />} />
+                <Route path="/etappe/:id" element={<EtappeDetail />} />
+            </Routes>
+        </div>
+    );
+}
+
 function App() {
     return (
         <BrowserRouter>
-            <div className="teutotourenWebsite">
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Startseite />} />
-                    <Route path="/etappe/:id" element={<EtappeDetail />} />
-                </Routes>
-            </div>
+            <AppInner />
         </BrowserRouter>
     );
 }

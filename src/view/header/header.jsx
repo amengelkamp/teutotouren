@@ -1,5 +1,4 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './header.css';
 
 const NavBtn = ({ icon, label }) => (
@@ -9,12 +8,11 @@ const NavBtn = ({ icon, label }) => (
     </button>
 );
 
-const Header = () => {
-    const navigate = useNavigate();
+const Header = ({ onHome }) => {
     return (
         <div className="header">
             <div className="headerLeft">
-                <div className="headerLogoBlock" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+                <div className="headerLogoBlock" onClick={onHome} style={{ cursor: 'pointer' }}>
                     <div className="teutotourenLogo">
                         heimattouren<span className="logoDomain">.de</span>
                     </div>

@@ -34,10 +34,19 @@ test.describe('Header', () => {
         await expect(page.locator('.logoSlogan')).toContainText('Urlaub zuhause.');
     });
 
-    test('Logo-Klick navigiert zur Startseite', async ({ page }) => {
+    test('Logo-Klick navigiert zur Startseite und zeigt RegionShowcase', async ({ page }) => {
+        // Von Detailseite
         await page.goto('/etappe/1');
         await page.locator('.headerLogoBlock').click();
         await expect(page).toHaveURL('/');
+        await expect(page.locator('.regionShowcase')).toBeVisible();
+
+        // Von Suchergebnissen (activeFilters gesetzt)
+        await page.locator('.regionCard', { hasText: 'Teutoburger Wald' }).click();
+        await page.waitForSelector('.etappenCard', { timeout: 10000 });
+        await page.locator('.headerLogoBlock').click();
+        await expect(page.locator('.regionShowcase')).toBeVisible();
+        await expect(page.locator('.etappenCard')).toHaveCount(0);
     });
 
     test('Nav-Buttons vorhanden', async ({ page }) => {
