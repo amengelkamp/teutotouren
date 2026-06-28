@@ -19,8 +19,27 @@ const EtappenErgebnisse = ({ filters }) => {
         if (filters.schwierigkeit) params.schwierigkeit = filters.schwierigkeit;
 
         axios.get('/api/allTrails', { params })
-            .then((response) => {
-                setEtappen(response.data);
+            .then(async (response) => {
+                let trails = response.data;
+
+                const { userCoords, mode, anreisezeit } = filters;
+                if (userCoords && anreisezeit) {
+                    const maxMinutes = parseInt(anreisezeit);
+                    const times = await Promise.all(
+                        trails.map((t) =>
+                            axios.get('/api/traveltime', {
+                                params: { user_lat: userCoords.lat, user_lon: userCoords.lon, trail_id: t.id, mode: mode || 'bahn' }
+                            }).then((r) => r.data.minutes).catch(() => null)
+                        )
+                    );
+                    const allFailed = times.every((t) => t === null);
+                    if (!allFailed) {
+                        trails = trails.filter((_, i) => times[i] !== null && times[i] <= maxMinutes);
+                        trails = trails.map((t, i) => ({ ...t, anreiseMinuten: times[i] }));
+                    }
+                }
+
+                setEtappen(trails);
                 setLoading(false);
             })
             .catch((error) => {
@@ -84,6 +103,9 @@ const EtappenErgebnisse = ({ filters }) => {
                                     <span className="cardChip">⏱ {etappe.dauer} Std.</span>
                                     <span className="cardChip">⛰ {etappe.hoehenmeter} m</span>
                                     <span className="cardChip">Etappe {etappe.etappennummer}</span>
+                                    {etappe.anreiseMinuten != null && (
+                                        <span className="cardChip">🚏 {etappe.anreiseMinuten} Min. Anreise</span>
+                                    )}
                                 </div>
                                 {etappe.oepnv_hinweis && (
                                     <div className="cardOepnv">🚌 {etappe.oepnv_hinweis}</div>

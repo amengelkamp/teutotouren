@@ -9,15 +9,13 @@ const OPTIONEN = [
     { value: '180', label: '3 Std.' },
 ];
 
-const Anreisezeit = () => {
-    const [value, setValue] = useState('');
-
+const Anreisezeit = ({ value = '', onChange }) => {
     return (
         <div className="anreisezeitWrapper">
             <select
                 className="anreisezeitSelect"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => onChange && onChange(e.target.value)}
             >
                 {OPTIONEN.map((o) => (
                     <option key={o.value} value={o.value}>{o.label}</option>

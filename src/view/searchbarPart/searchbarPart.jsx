@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './searchbarPart.css';
 import FindPosition from '../../position/findPosition';
 import FormOfTravel from '../../formOfTravel/formOfTravel';
@@ -7,6 +7,12 @@ import DauerFilter from '../../dauerFilter/dauerFilter';
 import SchwierigkeitFilter from '../../schwierigkeitFilter/schwierigkeitFilter';
 
 const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
+    const [userCoords, setUserCoords] = useState(null);
+
+    const handleSearch = () => {
+        onSearch(userCoords);
+    };
+
     return (
         <div className="heroOuter">
             <div className="heroSection">
@@ -26,17 +32,23 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                     <div className="searchRow">
                         <div className="searchField wide">
                             <span className="searchFieldLabel">Startpunkt</span>
-                            <FindPosition />
+                            <FindPosition onCoordsChange={(lat, lon) => setUserCoords({ lat, lon })} />
                         </div>
                         <div className="searchField">
                             <span className="searchFieldLabel">Reiseart</span>
-                            <FormOfTravel />
+                            <FormOfTravel
+                                value={filters.mode}
+                                onChange={(val) => onFilterChange('mode', val)}
+                            />
                         </div>
                         <div className="searchField">
                             <span className="searchFieldLabel">Max. Anreisezeit</span>
-                            <Anreisezeit />
+                            <Anreisezeit
+                                value={filters.anreisezeit}
+                                onChange={(val) => onFilterChange('anreisezeit', val)}
+                            />
                         </div>
-                        <button onClick={onSearch} className="searchBtn">
+                        <button onClick={handleSearch} className="searchBtn">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
                             </svg>

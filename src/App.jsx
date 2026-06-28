@@ -5,15 +5,15 @@ import RoutesPart from './view/routesPart/routesPart';
 import Header from './view/header/header';
 
 function App() {
-    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '' });
+    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'bahn', anreisezeit: '' });
     const [activeFilters, setActiveFilters] = useState(null);
 
     const handleFilterChange = (key, value) => {
         setFilters((prev) => ({ ...prev, [key]: value }));
     };
 
-    const handleSearch = () => {
-        setActiveFilters({ ...filters });
+    const handleSearch = (userCoords) => {
+        setActiveFilters({ ...filters, userCoords });
     };
 
     return (

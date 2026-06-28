@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
 import './formOfTravel.css';
 
-const FormOfTravel = () => {
-    const [selected, setSelected] = useState('bahn');
-
+const FormOfTravel = ({ value = 'bahn', onChange }) => {
     return (
         <div className="segmentedControl">
             <button
-                className={`segmentBtn ${selected === 'bahn' ? 'aktiv' : ''}`}
-                onClick={() => setSelected('bahn')}
+                className={`segmentBtn ${value === 'bahn' ? 'aktiv' : ''}`}
+                onClick={() => onChange && onChange('bahn')}
             >
                 🚆 Bahn
             </button>
             <button
-                className={`segmentBtn ${selected === 'auto' ? 'aktiv' : ''}`}
-                onClick={() => setSelected('auto')}
+                className={`segmentBtn ${value === 'auto' ? 'aktiv' : ''}`}
+                onClick={() => onChange && onChange('auto')}
             >
                 🚗 Auto
             </button>

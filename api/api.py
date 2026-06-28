@@ -5,6 +5,9 @@ import sqlite3
 import requests
 from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
 app = Flask(__name__)
 CORS(app)

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './findPosition.css';
 
-const FindPosition = () => {
+const FindPosition = ({ onCoordsChange }) => {
     const [position, setPosition] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -12,6 +12,7 @@ const FindPosition = () => {
 
         navigator.geolocation.getCurrentPosition(
             async ({ coords }) => {
+                if (onCoordsChange) onCoordsChange(coords.latitude, coords.longitude);
                 try {
                     const res = await fetch(
                         `https://nominatim.openstreetmap.org/reverse?lat=${coords.latitude}&lon=${coords.longitude}&format=json&addressdetails=1`,
