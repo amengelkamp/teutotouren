@@ -56,23 +56,24 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                             Suchen
                         </button>
                     </div>
+                    <div className="searchDivider" />
                     <div className="filterRow">
                         <div className="filterField">
-                            <span className="searchFieldLabel">Max. Etappendauer</span>
+                            <span className="filterLabel">Max. Etappendauer</span>
                             <DauerFilter
                                 value={filters.dauerMax}
                                 onChange={(val) => onFilterChange('dauerMax', val)}
                             />
                         </div>
                         <div className="filterField">
-                            <span className="searchFieldLabel">Schwierigkeit</span>
+                            <span className="filterLabel">Schwierigkeit</span>
                             <SchwierigkeitFilter
                                 value={filters.schwierigkeit}
                                 onChange={(val) => onFilterChange('schwierigkeit', val)}
                             />
                         </div>
                         <div className="filterField">
-                            <span className="searchFieldLabel">Region</span>
+                            <span className="filterLabel">Region</span>
                             <RegionFilter
                                 value={filters.region}
                                 onChange={(val) => onFilterChange('region', val)}

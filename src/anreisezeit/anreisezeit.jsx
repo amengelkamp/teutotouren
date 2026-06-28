@@ -21,7 +21,7 @@ const Anreisezeit = ({ value = '', onChange }) => {
                     <option key={o.value} value={o.value}>{o.label}</option>
                 ))}
             </select>
-            <svg className="selectArrow" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg className="selectArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"/>
             </svg>
         </div>

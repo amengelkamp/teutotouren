@@ -1,11 +1,16 @@
 .segmentedControl {
     display: flex;
     flex-direction: row;
-    height: 48px;
+    height: 52px;
     border: 1.5px solid #e8e8e8;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    background: #fafafa;
+    background: #f7f7f7;
+    transition: border-color 0.18s;
+}
+
+.segmentedControl:hover {
+    border-color: #d0d0d0;
 }
 
 .segmentBtn {
@@ -18,16 +23,18 @@
     color: #666;
     cursor: pointer;
     transition: background-color 0.15s, color 0.15s;
-    padding: 0 12px;
+    padding: 0 14px;
     white-space: nowrap;
+    letter-spacing: 0.1px;
 }
 
 .segmentBtn:first-child {
-    border-right: 1.5px solid #e8e8e8;
+    border-right: 1.5px solid #eaeaea;
 }
 
 .segmentBtn:hover:not(.aktiv) {
-    background: #f0f0f0;
+    background: #efefef;
+    color: #333;
 }
 
 .segmentBtn.aktiv {

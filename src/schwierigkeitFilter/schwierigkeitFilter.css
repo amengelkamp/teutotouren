@@ -1,28 +1,30 @@
 .schwierigkeitChips {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 6px;
     flex-wrap: wrap;
 }
 
 .schwierigkeitChip {
-    height: 34px;
-    padding: 0 16px;
-    border: 1.5px solid #e0e0e0;
+    height: 36px;
+    padding: 0 18px;
+    border: 1.5px solid #e8e8e8;
     border-radius: 100px;
     background: white;
-    color: #444;
+    color: #555;
     font-size: 13px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
     cursor: pointer;
-    transition: all 0.15s;
+    transition: border-color 0.15s, color 0.15s, background 0.15s, box-shadow 0.15s;
     white-space: nowrap;
+    letter-spacing: 0.1px;
 }
 
 .schwierigkeitChip:hover:not(.aktiv) {
-    border-color: #184D47;
-    color: #184D47;
+    border-color: #c0c0c0;
+    color: #1a1a1a;
+    background: #f7f7f7;
 }
 
 .schwierigkeitChip.aktiv {
@@ -30,4 +32,5 @@
     border-color: #184D47;
     color: white;
     font-weight: 600;
+    box-shadow: 0 2px 8px rgba(24,77,71,0.22);
 }
