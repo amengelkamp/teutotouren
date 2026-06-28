@@ -1,67 +1,110 @@
+import os
 import time
-from flask import Flask, Response
 import json
 import sqlite3
-import base64
-
-from flask_cors import CORS  # Hier wird Flask-CORS importiert, damit das frontend auf den BE Port zugreifen kann
-
+from flask import Flask, Response, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app)  # aktiviert CORS für alle Routen
+CORS(app)
+
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'SQL', 'teutotourenDatabase.db')
+
+
+def get_db():
+    con = sqlite3.connect(DB_PATH)
+    con.row_factory = sqlite3.Row
+    return con
+
 
 @app.route('/time')
 def get_current_time():
     return {'time': time.time()}
 
-@app.route('/position')
-def get_current_position():
-    return {'position': 'Steinhagen'}
-
-@app.route("/trail")
-def get_trails():
-    return {"Startposition": "Rheine", "Endposition": "Hörstel-Bergeshövede"}
 
 @app.route("/allTrails")
 def get_all_trails():
-    try: 
-        con = sqlite3.connect("../SQL/teutotourenDatabase.db")
-        con.row_factory = sqlite3.Row  # Zugriff auf Spalten per Namen
+    dauer_max = None
+    schwierigkeit = None
+
+    try:
+        import flask
+        dauer_max = flask.request.args.get('dauer_max', type=float)
+        schwierigkeit = flask.request.args.get('schwierigkeit')
+    except Exception:
+        pass
+
+    try:
+        con = get_db()
         cur = con.cursor()
 
-        # Daten aus der Tabelle holen
-        res = cur.execute("SELECT * FROM etappen")
-        rows = res.fetchall()
-        print(rows)
-        con.close()  # Verbindung schließen
+        query = "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis FROM etappen WHERE 1=1"
+        params = []
 
-        # Daten in eine Liste von Dictionaries umwandeln
+        if dauer_max is not None:
+            query += " AND dauer <= ?"
+            params.append(dauer_max)
+        if schwierigkeit:
+            query += " AND schwierigkeit = ?"
+            params.append(schwierigkeit)
+
+        rows = cur.execute(query, params).fetchall()
+        con.close()
+
         data = [
             {
                 "id": row["id"],
                 "name": row["name"],
+                "wanderweg": row["wanderweg"],
+                "etappennummer": row["wanderweg_etappennummer"],
                 "etappe_startpunkt": row["etappe_startpunkt"],
                 "etappe_endpunkt": row["etappe_endpunkt"],
                 "dauer": row["dauer"],
-                "image1": base64.b64encode(row["image1"]).decode("utf-8") if row["image1"] else None,
                 "hoehenmeter": row["hoehenmeter"],
+                "schwierigkeit": row["schwierigkeit"],
+                "image_path": row["image_path"],
+                "gpx_path": row["gpx_path"],
+                "oepnv_hinweis": row["oepnv_hinweis"],
             }
-        for row in rows
+            for row in rows
         ]
 
-        # JSON mit UTF-8 und richtigen Umlauten
-        json_data = json.dumps(data, ensure_ascii=False)
+        return Response(json.dumps(data, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
-        return Response(json_data, content_type="application/json; charset=utf-8")
-    
     except sqlite3.Error as e:
-        return jsonify({"error": str(e)}), 500  # Fehler-Handling mit HTTP 500
-    
+        return jsonify({"error": str(e)}), 500
 
 
+@app.route("/trail/<int:trail_id>")
+def get_trail(trail_id):
+    try:
+        con = get_db()
+        cur = con.cursor()
+        row = cur.execute(
+            "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis FROM etappen WHERE id = ?",
+            (trail_id,)
+        ).fetchone()
+        con.close()
 
-#@app.route("/findPosition")
-#def get_position():
-#        try:  
-        
-             
+        if row is None:
+            return jsonify({"error": "Etappe nicht gefunden"}), 404
+
+        data = {
+            "id": row["id"],
+            "name": row["name"],
+            "wanderweg": row["wanderweg"],
+            "etappennummer": row["wanderweg_etappennummer"],
+            "etappe_startpunkt": row["etappe_startpunkt"],
+            "etappe_endpunkt": row["etappe_endpunkt"],
+            "dauer": row["dauer"],
+            "hoehenmeter": row["hoehenmeter"],
+            "schwierigkeit": row["schwierigkeit"],
+            "image_path": row["image_path"],
+            "gpx_path": row["gpx_path"],
+            "oepnv_hinweis": row["oepnv_hinweis"],
+        }
+
+        return Response(json.dumps(data, ensure_ascii=False), content_type="application/json; charset=utf-8")
+
+    except sqlite3.Error as e:
+        return jsonify({"error": str(e)}), 500
