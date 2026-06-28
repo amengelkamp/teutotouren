@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './etappenErgebnisse.css';
 
@@ -9,6 +10,7 @@ const SCHWIERIGKEIT_FARBE = {
 };
 
 const EtappenErgebnisse = ({ filters }) => {
+    const navigate = useNavigate();
     const [etappen, setEtappen] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -111,7 +113,7 @@ const EtappenErgebnisse = ({ filters }) => {
                                 {etappe.oepnv_hinweis && (
                                     <div className="cardOepnv">🚌 {etappe.oepnv_hinweis}</div>
                                 )}
-                                <button className="cardCta">Details ansehen →</button>
+                                <button className="cardCta" onClick={() => navigate(`/etappe/${etappe.id}`)}>Details ansehen →</button>
                             </div>
                         </div>
                     ))}
