@@ -16,8 +16,8 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
             />
             <div className="heroOverlay" />
             <div className="heroContent">
-                <h1 className="heroHeadline">Finde deine nächste Wandertour</h1>
-                <p className="heroSubtitle">Alle Etappen des Hermannswegs – nach Dauer, Anreise und Schwierigkeit filtern</p>
+                <h1 className="heroHeadline">Wandern im Teutoburger Wald — passend zu dir.</h1>
+                <p className="heroSubtitle">Nur offizielle Wege. Ausgeschildert. Handy wegstecken, Kopf freibekommen.</p>
                 <div className="searchCard">
                     <div className="searchRow">
                         <div className="searchField wide">

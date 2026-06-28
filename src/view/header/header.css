@@ -14,25 +14,24 @@
 
 .headerLeft {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 10px;
-}
-
-.headerIcon {
-    width: 32px;
-    height: 32px;
 }
 
 .teutotourenLogo {
-    font-family: 'kawoszeh', sans-serif;
-    font-size: 28px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
     color: white;
-    letter-spacing: 1px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+}
+
+.logoDomain {
+    color: #6ecfc4;
 }
 
 .headerTagline {
     font-size: 13px;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.55);
     font-family: 'Inter', sans-serif;
 }

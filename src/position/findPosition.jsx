@@ -3,20 +3,36 @@ import './findPosition.css';
 
 const FindPosition = () => {
     const [position, setPosition] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const fetchPosition = () => {
-        if ('geolocation' in navigator) {
-            navigator.geolocation.getCurrentPosition(
-                async (pos) => {
-                    const lat = pos.coords.latitude;
-                    const lon = pos.coords.longitude;
-                    setPosition(`${lat.toFixed(4)}, ${lon.toFixed(4)}`);
-                },
-                (error) => {
-                    setPosition('Standort nicht verfügbar');
+        if (!('geolocation' in navigator)) return;
+        setLoading(true);
+        setPosition('');
+
+        navigator.geolocation.getCurrentPosition(
+            async ({ coords }) => {
+                try {
+                    const res = await fetch(
+                        `https://nominatim.openstreetmap.org/reverse?lat=${coords.latitude}&lon=${coords.longitude}&format=json&addressdetails=1`,
+                        { headers: { 'Accept-Language': 'de' } }
+                    );
+                    const data = await res.json();
+                    const a = data.address;
+                    const label = a.city || a.town || a.village || a.municipality || data.display_name;
+                    setPosition(label);
+                } catch {
+                    setPosition(`${coords.latitude.toFixed(4)}, ${coords.longitude.toFixed(4)}`);
+                } finally {
+                    setLoading(false);
                 }
-            );
-        }
+            },
+            () => {
+                setPosition('Standort nicht verfügbar');
+                setLoading(false);
+            },
+            { enableHighAccuracy: false, timeout: 4000, maximumAge: 300000 }
+        );
     };
 
     return (
@@ -29,14 +45,14 @@ const FindPosition = () => {
                 type="text"
                 placeholder="Ort oder Adresse eingeben"
                 className="positionInput"
-                value={position}
+                value={loading ? 'Wird ermittelt…' : position}
                 onChange={(e) => setPosition(e.target.value)}
+                readOnly={loading}
             />
-            <button className="positionGpsBtn" onClick={fetchPosition} title="Aktuellen Standort ermitteln">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+            <button className="positionGpsBtn" onClick={fetchPosition} title="Aktuellen Standort ermitteln" disabled={loading}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
                     <circle cx="12" cy="12" r="3"/>
                     <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
-                    <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" opacity="0"/>
                 </svg>
             </button>
         </div>
