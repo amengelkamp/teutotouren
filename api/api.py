@@ -95,6 +95,7 @@ def get_all_trails():
         import flask
         dauer_max = flask.request.args.get('dauer_max', type=float)
         schwierigkeit = flask.request.args.get('schwierigkeit')
+        region = flask.request.args.get('region')
     except Exception:
         pass
 
@@ -102,7 +103,7 @@ def get_all_trails():
         con = get_db()
         cur = con.cursor()
 
-        query = "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis FROM etappen WHERE 1=1"
+        query = "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis, region FROM etappen WHERE 1=1"
         params = []
 
         if dauer_max is not None:
@@ -111,6 +112,9 @@ def get_all_trails():
         if schwierigkeit:
             query += " AND schwierigkeit = ?"
             params.append(schwierigkeit)
+        if region:
+            query += " AND region = ?"
+            params.append(region)
 
         rows = cur.execute(query, params).fetchall()
         con.close()
@@ -129,6 +133,7 @@ def get_all_trails():
                 "image_path": row["image_path"],
                 "gpx_path": row["gpx_path"],
                 "oepnv_hinweis": row["oepnv_hinweis"],
+                "region": row["region"],
             }
             for row in rows
         ]
@@ -145,7 +150,7 @@ def get_trail(trail_id):
         con = get_db()
         cur = con.cursor()
         row = cur.execute(
-            "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis FROM etappen WHERE id = ?",
+            "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis, start_lat, start_lon FROM etappen WHERE id = ?",
             (trail_id,)
         ).fetchone()
         con.close()
@@ -166,6 +171,8 @@ def get_trail(trail_id):
             "image_path": row["image_path"],
             "gpx_path": row["gpx_path"],
             "oepnv_hinweis": row["oepnv_hinweis"],
+            "start_lat": row["start_lat"],
+            "start_lon": row["start_lon"],
         }
 
         return Response(json.dumps(data, ensure_ascii=False), content_type="application/json; charset=utf-8")

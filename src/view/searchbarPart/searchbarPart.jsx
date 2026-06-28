@@ -5,6 +5,7 @@ import FormOfTravel from '../../formOfTravel/formOfTravel';
 import Anreisezeit from '../../anreisezeit/anreisezeit';
 import DauerFilter from '../../dauerFilter/dauerFilter';
 import SchwierigkeitFilter from '../../schwierigkeitFilter/schwierigkeitFilter';
+import RegionFilter from '../../regionFilter/regionFilter';
 
 const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
     const [userCoords, setUserCoords] = useState(null);
@@ -68,6 +69,13 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                             <SchwierigkeitFilter
                                 value={filters.schwierigkeit}
                                 onChange={(val) => onFilterChange('schwierigkeit', val)}
+                            />
+                        </div>
+                        <div className="filterField">
+                            <span className="searchFieldLabel">Region</span>
+                            <RegionFilter
+                                value={filters.region}
+                                onChange={(val) => onFilterChange('region', val)}
                             />
                         </div>
                     </div>

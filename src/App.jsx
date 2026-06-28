@@ -7,7 +7,7 @@ import Header from './view/header/header';
 import EtappeDetail from './etappeDetail/etappeDetail';
 
 function Startseite() {
-    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'bahn', anreisezeit: '' });
+    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'bahn', anreisezeit: '', region: '' });
     const [activeFilters, setActiveFilters] = useState(null);
 
     const handleFilterChange = (key, value) => {

@@ -19,6 +19,7 @@ const EtappenErgebnisse = ({ filters }) => {
         const params = {};
         if (filters.dauerMax) params.dauer_max = filters.dauerMax;
         if (filters.schwierigkeit) params.schwierigkeit = filters.schwierigkeit;
+        if (filters.region) params.region = filters.region;
 
         axios.get('/api/allTrails', { params })
             .then(async (response) => {
@@ -54,6 +55,7 @@ const EtappenErgebnisse = ({ filters }) => {
     const activeChips = [
         filters.dauerMax && `Max. ${filters.dauerMax} Std.`,
         filters.schwierigkeit && filters.schwierigkeit.charAt(0).toUpperCase() + filters.schwierigkeit.slice(1),
+        filters.region && filters.region,
     ].filter(Boolean);
 
     if (loading) {
