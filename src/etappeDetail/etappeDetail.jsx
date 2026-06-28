@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
 import axios from 'axios';
 import 'leaflet/dist/leaflet.css';
 import './etappeDetail.css';
@@ -19,6 +19,7 @@ const EtappeDetail = () => {
     const [etappe, setEtappe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [gpxTrack, setGpxTrack] = useState(null);
 
     useEffect(() => {
         axios.get(`/api/trail/${id}`)
@@ -26,14 +27,30 @@ const EtappeDetail = () => {
             .catch(() => { setError('Etappe nicht gefunden.'); setLoading(false); });
     }, [id]);
 
-    if (loading) return <div className="detailStatus">Wird geladen…</div>;
-    if (error) return <div className="detailStatus">{error}</div>;
+    useEffect(() => {
+        if (!etappe?.gpx_path) return;
+        fetch(etappe.gpx_path)
+            .then(r => r.text())
+            .then(xml => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(xml, 'text/xml');
+                const pts = Array.from(doc.querySelectorAll('trkpt')).map(pt => [
+                    parseFloat(pt.getAttribute('lat')),
+                    parseFloat(pt.getAttribute('lon')),
+                ]);
+                setGpxTrack(pts);
+            })
+            .catch(() => {});
+    }, [etappe?.gpx_path]);
+
+    if (loading) return <div className="detailPage"><div className="detailStatus">Wird geladen…</div></div>;
+    if (error) return <div className="detailPage"><div className="detailStatus">{error}</div></div>;
 
     const hasCoords = etappe.start_lat && etappe.start_lon;
 
     return (
         <div className="detailPage">
-            <button className="detailBack" onClick={() => navigate(-1)}>
+            <button className="detailBack" onClick={() => navigate('/')}>
                 ← Zurück
             </button>
 
@@ -63,16 +80,27 @@ const EtappeDetail = () => {
                         <span className="detailStatVal">{etappe.dauer} Std.</span>
                         <span className="detailStatLabel">Dauer</span>
                     </div>
-                    <div className="detailStat">
-                        <span className="detailStatIcon">⛰</span>
-                        <span className="detailStatVal">{etappe.hoehenmeter} m</span>
-                        <span className="detailStatLabel">Höhenmeter</span>
-                    </div>
-                    <div className="detailStat">
-                        <span className="detailStatIcon">🗺</span>
-                        <span className="detailStatVal">Etappe {etappe.etappennummer}</span>
-                        <span className="detailStatLabel">{etappe.wanderweg}</span>
-                    </div>
+                    {etappe.hoehenmeter > 0 && (
+                        <div className="detailStat">
+                            <span className="detailStatIcon">⛰</span>
+                            <span className="detailStatVal">{etappe.hoehenmeter} m</span>
+                            <span className="detailStatLabel">Höhenmeter</span>
+                        </div>
+                    )}
+                    {etappe.laenge_km && (
+                        <div className="detailStat">
+                            <span className="detailStatIcon">📏</span>
+                            <span className="detailStatVal">{etappe.laenge_km} km</span>
+                            <span className="detailStatLabel">Länge</span>
+                        </div>
+                    )}
+                    {etappe.etappennummer > 0 && (
+                        <div className="detailStat">
+                            <span className="detailStatIcon">🗺</span>
+                            <span className="detailStatVal">Etappe {etappe.etappennummer}</span>
+                            <span className="detailStatLabel">{etappe.wanderweg}</span>
+                        </div>
+                    )}
                 </div>
 
                 {etappe.oepnv_hinweis && (
@@ -86,8 +114,8 @@ const EtappeDetail = () => {
                     <h2 className="detailSectionTitle">Karte</h2>
                     {hasCoords ? (
                         <MapContainer
-                            center={[etappe.start_lat, etappe.start_lon]}
-                            zoom={11}
+                            center={gpxTrack ? gpxTrack[0] : [etappe.start_lat, etappe.start_lon]}
+                            zoom={gpxTrack ? 12 : 11}
                             className="detailMap"
                         >
                             <TileLayer
@@ -97,6 +125,9 @@ const EtappeDetail = () => {
                             <Marker position={[etappe.start_lat, etappe.start_lon]}>
                                 <Popup>Start: {etappe.etappe_startpunkt}</Popup>
                             </Marker>
+                            {gpxTrack && (
+                                <Polyline positions={gpxTrack} color="#184D47" weight={3} opacity={0.85} />
+                            )}
                         </MapContainer>
                     ) : (
                         <div className="detailMapPlaceholder">Kartenkoordinaten nicht verfügbar</div>

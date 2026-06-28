@@ -106,8 +106,10 @@ const EtappenErgebnisse = ({ filters }) => {
                                 </div>
                                 <div className="cardChips">
                                     <span className="cardChip">⏱ {etappe.dauer} Std.</span>
-                                    <span className="cardChip">⛰ {etappe.hoehenmeter} m</span>
-                                    <span className="cardChip">Etappe {etappe.etappennummer}</span>
+                                    {etappe.hoehenmeter > 0 && <span className="cardChip">⛰ {etappe.hoehenmeter} m</span>}
+                                    {etappe.laenge_km && <span className="cardChip">{etappe.laenge_km} km</span>}
+                                    {etappe.etappennummer > 0 && <span className="cardChip">Etappe {etappe.etappennummer}</span>}
+                                    {etappe.typ && etappe.typ !== 'Streckenwanderung' && <span className="cardChip">{etappe.typ}</span>}
                                     {etappe.anreiseMinuten != null && (
                                         <span className="cardChip">🚏 {etappe.anreiseMinuten} Min. Anreise</span>
                                     )}

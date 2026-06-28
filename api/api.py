@@ -153,7 +153,7 @@ def get_trail(trail_id):
         con = get_db()
         cur = con.cursor()
         row = cur.execute(
-            "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis, start_lat, start_lon FROM etappen WHERE id = ?",
+            "SELECT id, name, wanderweg, wanderweg_etappennummer, etappe_startpunkt, etappe_endpunkt, dauer, hoehenmeter, schwierigkeit, image_path, gpx_path, oepnv_hinweis, start_lat, start_lon, laenge_km, typ FROM etappen WHERE id = ?",
             (trail_id,)
         ).fetchone()
         con.close()
@@ -176,6 +176,8 @@ def get_trail(trail_id):
             "oepnv_hinweis": row["oepnv_hinweis"],
             "start_lat": row["start_lat"],
             "start_lon": row["start_lon"],
+            "laenge_km": row["laenge_km"],
+            "typ": row["typ"],
         }
 
         return Response(json.dumps(data, ensure_ascii=False), content_type="application/json; charset=utf-8")
