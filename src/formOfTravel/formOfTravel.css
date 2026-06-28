@@ -1,12 +1,37 @@
-.formOfTravel {
-    background-color: rgb(250, 250, 250);
+.segmentedControl {
     display: flex;
     flex-direction: row;
-    border-radius: 8px;
-    height: 70px;
-    }
+    height: 48px;
+    border: 1.5px solid #e8e8e8;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fafafa;
+}
 
+.segmentBtn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    color: #666;
+    cursor: pointer;
+    transition: background-color 0.15s, color 0.15s;
+    padding: 0 12px;
+    white-space: nowrap;
+}
 
-.publicTransportation, .byCar {
-    width: 60px;
-    }
+.segmentBtn:first-child {
+    border-right: 1.5px solid #e8e8e8;
+}
+
+.segmentBtn:hover:not(.aktiv) {
+    background: #f0f0f0;
+}
+
+.segmentBtn.aktiv {
+    background-color: #184D47;
+    color: white;
+    font-weight: 600;
+}

@@ -1,0 +1,27 @@
+.dauerFilter {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 180px;
+}
+
+.dauerValue {
+    font-size: 14px;
+    font-weight: 600;
+    color: #184D47;
+}
+
+.dauerSlider {
+    width: 100%;
+    height: 4px;
+    accent-color: #184D47;
+    cursor: pointer;
+    appearance: auto;
+}
+
+.dauerRange {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #bbb;
+}

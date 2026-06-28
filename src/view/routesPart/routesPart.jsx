@@ -1,23 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './routesPart.css';
 import EtappenPart from '../../etappenPart/etappenPart';
 
-const RoutesPart = () => {
+const RoutesPart = ({ filters }) => {
     return (
         <div className="routesPart">
-                <div className="routeResults">
-                    <EtappenPart />
-                </div>
+            <div className="routeResults">
+                <EtappenPart filters={filters} />
+            </div>
         </div>
-            );
-    }
-
-
-
-
-
-
-
-
+    );
+};
 
 export default RoutesPart;

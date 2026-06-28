@@ -1,28 +1,34 @@
 *, *::before, *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Space Grotesk', sans-serif;
+    background-color: #f2f4f6;
+    color: #1a1a1a;
 }
 
-
-
- /*{
-    border: 1px solid rgb(19, 18, 18);
-}  */
+#root {
+    min-height: 100vh;
+}
 
 .teutotourenWebsite {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
-
 
 .header {
-  display: flex;
-  flex-direction: column;
-  height: 60px;
-  background-color: #184D47;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    background-color: #184D47;
+    padding: 0 32px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-

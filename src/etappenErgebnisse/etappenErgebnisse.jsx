@@ -2,69 +2,100 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './etappenErgebnisse.css';
 
+const SCHWIERIGKEIT_FARBE = {
+    leicht: '#4caf50',
+    mittel: '#ff9800',
+    schwer: '#f44336',
+};
 
-const EtappenErgebnisse = () => {
+const EtappenErgebnisse = ({ filters }) => {
+    const [etappen, setEtappen] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-const [etappen, setEtappen] = useState([]);
-const [loading, setLoading] = useState([]);
+    useEffect(() => {
+        setLoading(true);
+        const params = {};
+        if (filters.dauerMax) params.dauer_max = filters.dauerMax;
+        if (filters.schwierigkeit) params.schwierigkeit = filters.schwierigkeit;
 
+        axios.get('/api/allTrails', { params })
+            .then((response) => {
+                setEtappen(response.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                console.error('Fehler beim Abrufen der Etappendaten:', error);
+                setLoading(false);
+            });
+    }, [filters]);
 
+    const activeChips = [
+        filters.dauerMax && `Max. ${filters.dauerMax} Std.`,
+        filters.schwierigkeit && filters.schwierigkeit.charAt(0).toUpperCase() + filters.schwierigkeit.slice(1),
+    ].filter(Boolean);
 
-
-// WENN "SUCHEN" GEKLICKT WIRD => ALLE ANZEIGEN
-useEffect(() => {
-     // Beispiel mit axios GET-Anfrage
-    axios.get('http://127.0.0.1:5000/allTrails')
-        .then(response => {
-            console.log(response.data);  // Die Daten aus der API anzeigen
-            setEtappen(response.data);
-            setLoading(false); //wenn Daten angekommen: hör auf zu laden
-        })
-        .catch(error => {
-            console.error('Fehler beim Abrufen der Etappendaten:', error);  // Fehlermeldung
-            setLoading(false);
-        });
-}, []);
-
-
-
-
-
-
+    if (loading) {
+        return <div className="statusMsg">Etappen werden geladen...</div>;
+    }
 
     return (
-        <div className='etappenListe'>
-
-            {etappen.length == 0 ? (
-                //Wenn Ladevorgang noch laufend
-                <div className='LoadingAnnouncement'>Die Etappen werden geladen... </div>
-            ) : (
-                etappen.map((etappe) => (
-                    <div key={etappe.id} className='einzelneEtappe'>
-                        <div className='etappenName'>{etappe.name}</div>
-                        <div className='etappenBildPlusDescription'>
-                            <img className='etappenBild' src={`data:image/jpeg;base64,${etappe.image1}`} alt={'Bild von ${etappe.name}'}/>
-                            <div className='etappenDescription'>
-                                <div className='etappenStartpunkt'>Etappenstart: {etappe.etappe_startpunkt}</div>
-                                <div className='etappenEndpunkt'>Etappenende: {etappe.etappe_endpunkt}</div>
-                                <div className='etappenDauer'>Dauer der Etappe: {etappe.dauer} Stunden</div>
-                                <div className='etappenHoehenmeter'>Höhenmeter gesamt: {etappe.hoehenmeter} Meter</div> 
-                            </div>
-                            </div>                          
+        <div>
+            <div className="ergebnisHeader">
+                <div className="ergebnisAnzahl">
+                    {etappen.length} {etappen.length === 1 ? 'Etappe' : 'Etappen'} gefunden
+                </div>
+                {activeChips.length > 0 && (
+                    <div className="activeChips">
+                        {activeChips.map((chip) => (
+                            <span key={chip} className="chip">{chip}</span>
+                        ))}
                     </div>
-                )))
-            }
+                )}
+            </div>
+
+            {etappen.length === 0 ? (
+                <div className="statusMsg">Keine Etappen für diese Filter gefunden.</div>
+            ) : (
+                <div className="etappenGrid">
+                    {etappen.map((etappe) => (
+                        <div key={etappe.id} className="etappenCard">
+                            <div className="cardImageWrapper">
+                                <img
+                                    className="cardImage"
+                                    src={etappe.image_path || '/images/placeholder.jpg'}
+                                    alt={`Bild von ${etappe.name}`}
+                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                />
+                                {etappe.schwierigkeit && (
+                                    <span
+                                        className="cardBadge"
+                                        style={{ backgroundColor: SCHWIERIGKEIT_FARBE[etappe.schwierigkeit] }}
+                                    >
+                                        {etappe.schwierigkeit}
+                                    </span>
+                                )}
+                            </div>
+                            <div className="cardBody">
+                                <div className="cardTitle">{etappe.name}</div>
+                                <div className="cardRoute">
+                                    {etappe.etappe_startpunkt} → {etappe.etappe_endpunkt}
+                                </div>
+                                <div className="cardChips">
+                                    <span className="cardChip">⏱ {etappe.dauer} Std.</span>
+                                    <span className="cardChip">⛰ {etappe.hoehenmeter} m</span>
+                                    <span className="cardChip">Etappe {etappe.etappennummer}</span>
+                                </div>
+                                {etappe.oepnv_hinweis && (
+                                    <div className="cardOepnv">🚌 {etappe.oepnv_hinweis}</div>
+                                )}
+                                <button className="cardCta">Details ansehen →</button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            )}
         </div>
-            ) 
-
-
-}
-
-
-
-
-
-
-
+    );
+};
 
 export default EtappenErgebnisse;

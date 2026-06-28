@@ -2,31 +2,31 @@ import React, { useState } from 'react';
 import './App.css';
 import SearchbarPart from './view/searchbarPart/searchbarPart';
 import RoutesPart from './view/routesPart/routesPart';
-import CalculationResults from './calculationResults/calculationResults';
 import Header from './view/header/header';
-import EtappenErgebnisse from './etappenErgebnisse/etappenErgebnisse';
 
 function App() {
-  const [showContent, setShowContent] = useState(false); // Umbenennung des States in showContent
+    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '' });
+    const [activeFilters, setActiveFilters] = useState(null);
 
-  const handleSearchForAllRoutes = () => {
-    setShowContent(true); // Setzt den State, um die Inhalte anzuzeigen
-  };
+    const handleFilterChange = (key, value) => {
+        setFilters((prev) => ({ ...prev, [key]: value }));
+    };
 
-  return (
-    <div className="teutotourenWebsite">
-      <Header />
-      <SearchbarPart onSearchForAllRoutes={handleSearchForAllRoutes} /> {/* Die Funktion wird hier übergeben */}
-      
-      {showContent && (
-        <>
-          <CalculationResults />
-          <RoutesPart />        
-        </>
-      )}
+    const handleSearch = () => {
+        setActiveFilters({ ...filters });
+    };
 
-    </div>
-  );
+    return (
+        <div className="teutotourenWebsite">
+            <Header />
+            <SearchbarPart
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                onSearch={handleSearch}
+            />
+            {activeFilters !== null && <RoutesPart filters={activeFilters} />}
+        </div>
+    );
 }
 
 export default App;

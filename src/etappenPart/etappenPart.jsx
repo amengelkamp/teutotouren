@@ -1,28 +1,13 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './etappenPart.css';
-import EtappenErgebnisse from '../etappenErgebnisse/etappenErgebnisse'; 
-import CalculationResults from '../calculationResults/calculationResults';
+import EtappenErgebnisse from '../etappenErgebnisse/etappenErgebnisse';
 
-const EtappenPart = () => {
-
-
-
-
-
-
+const EtappenPart = ({ filters }) => {
     return (
-        <div className='etappenPart'>
-            <EtappenErgebnisse />
+        <div className="etappenPart">
+            <EtappenErgebnisse filters={filters} />
         </div>
     );
-}
-
-
-
-
-
-
-
-
+};
 
 export default EtappenPart;

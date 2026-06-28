@@ -1,53 +1,157 @@
-/*= image-container*/
-.searchbarPart {
-    display: block;
+.heroSection {
     position: relative;
-    display: inline-block;
+    width: 100%;
+    height: 540px;
+    display: flex;
+    flex-direction: column;
+}
 
+.heroImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+}
+
+.heroOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.38) 55%,
+        rgba(0, 0, 0, 0.62) 100%
+    );
+}
+
+.heroContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    background-image: url('./wandernImWald01');
-    background-size: cover;
-    background-position:center;
+}
+
+.heroHeadline {
+    color: white;
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 8px 0;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+    letter-spacing: -0.3px;
+    padding: 0 24px;
+}
+
+.heroSubtitle {
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 15px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0 0 32px 0;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    padding: 0 24px;
+}
+
+/* ── Search Card ── */
+.searchCard {
+    background: white;
+    border-radius: 20px 20px 0 0;
+    padding: 28px 36px 24px;
     width: 100%;
-    height: 500px;
-      flex-direction: column;
-  }
-  
-  /*= image-container img */
-  .wandernImWald01 {
-    width: 100%;
-    height: 500px;
-    border-radius: 5px;
-    /*align-items: center;
-    justify-content: center;*/
-    display: block; /* Macht das Bild zu einem Block-Element */
-    /*margin: 0 auto; Zentriert das Bild */
-  }
-  
-  
-  
-  /*= overlay-text*/
-  .searchbarWithFilters {
-    position: absolute; /*for putting it above the photo*/
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Exakte Zentrierung */
-    padding: 10px; /* Abstand innerhalb der Box */
-    background-color: #184D47; /* Halbtransparenter Hintergrund */
+    max-width: 960px;
+    box-shadow: 0 -6px 32px rgba(0, 0, 0, 0.14);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ── Top row: main inputs ── */
+.searchRow {
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
     gap: 10px;
-    justify-content: space-between;
-    text-align: center;
-    border-radius: 8px;
-  }
-  
+}
 
-  
+.searchField {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    min-width: 120px;
+}
 
-  
-  
-  
+.searchField.wide {
+    flex: 2;
+}
 
-  
-  
+.searchFieldLabel {
+    font-size: 11px;
+    font-weight: 600;
+    color: #9e9e9e;
+    text-transform: uppercase;
+    letter-spacing: 0.7px;
+}
+
+/* ── Filter row ── */
+.filterRow {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    padding-top: 18px;
+    border-top: 1px solid #f0f0f0;
+    flex-wrap: wrap;
+}
+
+.filterField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ── Search button ── */
+.searchBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #184D47;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 0 28px;
+    height: 48px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.18s, transform 0.1s;
+    font-family: 'Inter', sans-serif;
+    flex-shrink: 0;
+}
+
+.searchBtn:hover {
+    background-color: #0f3330;
+}
+
+.searchBtn:active {
+    transform: scale(0.98);
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .heroSection { height: auto; }
+    .heroImage { position: static; height: 200px; width: 100%; object-fit: cover; }
+    .heroOverlay { display: none; }
+    .heroContent { position: static; align-items: stretch; }
+    .heroHeadline, .heroSubtitle { display: none; }
+    .searchCard { border-radius: 0; padding: 16px; max-width: 100%; }
+    .searchRow { flex-direction: column; }
+    .searchField { min-width: unset; }
+    .searchBtn { width: 100%; justify-content: center; }
+}

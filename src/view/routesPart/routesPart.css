@@ -1,9 +1,11 @@
 .routesPart {
-    display: block;
-    flex-direction: column;
-    position: relative;
-    display: inline-block;
-    align-items: center;
     width: 100%;
-    height: 500px;
+    background-color: #f2f4f6;
+    padding: 32px 0 48px;
+}
+
+.routeResults {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
 }
