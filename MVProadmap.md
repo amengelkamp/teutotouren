@@ -1,6 +1,6 @@
 # Teutotouren MVP-Roadmap
 
-**Gesamtfortschritt: 57% (27/47 Tasks abgeschlossen) — Phase 2b fertig ✓**
+**Gesamtfortschritt: 74% (35/47 Tasks abgeschlossen) — Phase 2b + Phase 3 fertig ✓**
 > Wird bei jeder Arbeitssession aktualisiert.
 
 **Zielgruppe:** Casual Day-Hiker  
@@ -61,15 +61,18 @@
 
 ---
 
-## Phase 3 — Anreisezeitberechnung
+## Phase 3 — Anreisezeitberechnung ✓
 
 **API:** HERE Routing API (Auto/Fuß/Rad/ÖPNV, 250k Req/Monat kostenlos, keine Kreditkarte)
 
-- [ ] HERE API-Key besorgen (developer.here.com, kostenlos, keine Kreditkarte)
-- [ ] Backend: `/traveltime`-Endpunkt — nimmt Nutzerkoordinaten + Etappen-Startpunkt + Reiseart
-- [ ] HERE Routing API für alle Reisearten (Auto, Fuß, Rad, Bahn/ÖPNV) → Fahrzeit in Minuten
-- [ ] Frontend: Anreisezeit-Filter nutzt echte berechnete Zeit statt manuelle Auswahl
-- [ ] Etappen filtern: nur anzeigen wenn Anreisezeit ≤ gewähltem Maximum
+- [x] HERE API-Key besorgen (developer.here.com, kostenlos, keine Kreditkarte)
+- [x] Backend: `/traveltime`-Endpunkt — nimmt Nutzerkoordinaten + Etappen-Startpunkt + Reiseart
+- [x] HERE Routing API für alle Reisearten (Auto, Fuß, Rad, Bahn/ÖPNV) → Fahrzeit in Minuten
+- [x] Frontend: Anreisezeit-Filter nutzt echte berechnete Zeit statt manuelle Auswahl
+- [x] Etappen filtern: nur anzeigen wenn Anreisezeit ≤ gewähltem Maximum
+- [x] start_lat/start_lon via HERE Geocoding in DB befüllt
+- [x] API Key sicher in .env (gitigniert), .env.example als Template
+- [x] Playwright-Tests: 11/11 grün inkl. GPS-Mock + Anreisezeit-Filter
 
 ---
 
