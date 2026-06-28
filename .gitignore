@@ -30,3 +30,5 @@ __pycache__
 *.jpg
 *.jpeg
 *.png
+.env
+api/.env

@@ -2,11 +2,21 @@ import os
 import time
 import json
 import sqlite3
-from flask import Flask, Response, jsonify
+import requests
+from flask import Flask, Response, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+
+HERE_API_KEY = os.environ.get("HERE_API_KEY", "")
+
+HERE_TRANSPORT_MAP = {
+    "auto": "car",
+    "fuss": "pedestrian",
+    "fahrrad": "bicycle",
+    "bahn": "transit",
+}
 
 DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'SQL', 'teutotourenDatabase.db')
 
@@ -15,6 +25,57 @@ def get_db():
     con = sqlite3.connect(DB_PATH)
     con.row_factory = sqlite3.Row
     return con
+
+
+@app.route("/traveltime")
+def get_traveltime():
+    try:
+        user_lat = float(request.args.get("user_lat"))
+        user_lon = float(request.args.get("user_lon"))
+        trail_id = int(request.args.get("trail_id"))
+        mode = request.args.get("mode", "auto").lower()
+    except (TypeError, ValueError):
+        return jsonify({"error": "user_lat, user_lon, trail_id und mode erforderlich"}), 400
+
+    con = get_db()
+    row = con.execute("SELECT start_lat, start_lon FROM etappen WHERE id=?", (trail_id,)).fetchone()
+    con.close()
+
+    if row is None or row["start_lat"] is None:
+        return jsonify({"error": "Etappe oder Koordinaten nicht gefunden"}), 404
+
+    here_mode = HERE_TRANSPORT_MAP.get(mode, "car")
+    origin = f"{user_lat},{user_lon}"
+    destination = f"{row['start_lat']},{row['start_lon']}"
+
+    if here_mode == "transit":
+        r = requests.get(
+            "https://transit.router.hereapi.com/v8/routes",
+            params={"origin": origin, "destination": destination, "return": "travelSummary", "apiKey": HERE_API_KEY},
+            timeout=8
+        )
+    else:
+        r = requests.get(
+            "https://router.hereapi.com/v8/routes",
+            params={"transportMode": here_mode, "origin": origin, "destination": destination, "return": "summary", "apiKey": HERE_API_KEY},
+            timeout=8
+        )
+
+    if r.status_code != 200:
+        return jsonify({"error": "HERE API Fehler", "detail": r.text}), 502
+
+    data = r.json()
+    try:
+        sections = data["routes"][0]["sections"]
+        if here_mode == "transit":
+            seconds = sum(s["travelSummary"]["duration"] for s in sections)
+        else:
+            seconds = sections[0]["summary"]["duration"]
+        minutes = round(seconds / 60)
+    except (KeyError, IndexError):
+        return jsonify({"error": "Keine Route gefunden"}), 404
+
+    return jsonify({"trail_id": trail_id, "mode": mode, "minutes": minutes})
 
 
 @app.route('/time')
