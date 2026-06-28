@@ -34,8 +34,9 @@ const EtappenErgebnisse = ({ filters }) => {
                     );
                     const allFailed = times.every((t) => t === null);
                     if (!allFailed) {
-                        trails = trails.filter((_, i) => times[i] !== null && times[i] <= maxMinutes);
-                        trails = trails.map((t, i) => ({ ...t, anreiseMinuten: times[i] }));
+                        trails = trails
+                            .map((t, i) => ({ ...t, anreiseMinuten: times[i] }))
+                            .filter((t) => t.anreiseMinuten !== null && t.anreiseMinuten <= maxMinutes);
                     }
                 }
 

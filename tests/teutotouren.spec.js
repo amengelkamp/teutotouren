@@ -81,8 +81,10 @@ test.describe('Filter: Anreisezeit mit GPS-Mock', () => {
     test('GPS-Button ermittelt Standort', async ({ page }) => {
         await page.goto('/');
         await page.locator('.positionGpsBtn').click();
-        await expect(page.locator('.positionInput')).not.toHaveValue('', { timeout: 12000 });
+        // Warten bis Laden fertig (Button nicht mehr disabled)
+        await expect(page.locator('.positionGpsBtn')).not.toBeDisabled({ timeout: 15000 });
         const val = await page.locator('.positionInput').inputValue();
+        expect(val).not.toBe('');
         expect(val).not.toContain('Wird ermittelt');
         expect(val).not.toContain('nicht verfügbar');
     });
@@ -106,7 +108,7 @@ test.describe('Filter: Anreisezeit mit GPS-Mock', () => {
         const chipCount = await chips.count();
         for (let i = 0; i < chipCount; i++) {
             const text = await chips.nth(i).innerText();
-            const minutes = parseInt(text);
+            const minutes = parseInt(text.match(/\d+/)?.[0] ?? '0');
             expect(minutes).toBeLessThanOrEqual(60);
         }
     });
