@@ -8,7 +8,7 @@ import EtappeDetail from './etappeDetail/etappeDetail';
 import RegionShowcase from './regionShowcase/regionShowcase';
 
 function Startseite() {
-    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'bahn', anreisezeit: '', region: '' });
+    const [filters, setFilters] = useState({ dauerMax: '', schwierigkeit: '', mode: 'auto', anreisezeit: '', region: '' });
     const [activeFilters, setActiveFilters] = useState(null);
 
     const handleFilterChange = (key, value) => {

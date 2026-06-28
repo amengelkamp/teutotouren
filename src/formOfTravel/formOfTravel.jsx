@@ -22,22 +22,22 @@ const IconAuto = () => (
     </svg>
 );
 
-const FormOfTravel = ({ value = 'bahn', onChange }) => {
+const FormOfTravel = ({ value = 'auto', onChange }) => {
     return (
         <div className={`segmentedControl${value ? ' hasActive' : ''}`}>
-            <button
-                className={`segmentBtn ${value === 'bahn' ? 'aktiv' : ''}`}
-                onClick={() => onChange && onChange('bahn')}
-                title="Bahn"
-            >
-                <IconBahn />
-            </button>
             <button
                 className={`segmentBtn ${value === 'auto' ? 'aktiv' : ''}`}
                 onClick={() => onChange && onChange('auto')}
                 title="Auto"
             >
                 <IconAuto />
+            </button>
+            <button
+                className={`segmentBtn ${value === 'bahn' ? 'aktiv' : ''}`}
+                onClick={() => onChange && onChange('bahn')}
+                title="Bahn"
+            >
+                <IconBahn />
             </button>
         </div>
     );

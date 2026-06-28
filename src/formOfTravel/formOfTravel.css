@@ -3,7 +3,7 @@
     flex-direction: row;
     height: 52px;
     border: 1.5px solid #e8e8e8;
-    border-radius: 100px;
+    border-radius: 12px;
     overflow: hidden;
     background: white;
     transition: border-color 0.18s;
