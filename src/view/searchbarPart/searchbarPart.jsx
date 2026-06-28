@@ -27,7 +27,6 @@ const SearchbarPart = ({ filters, onFilterChange, onSearch }) => {
                 </div>
                 <div className="heroContent">
                     <h1 className="heroHeadline">Urlaub zuhause —<br />dein nächster Wandertag.</h1>
-                    <p className="heroSubtitle">Offizielle Wege. Ausgeschildert. In deiner Nähe.<br />Handy wegstecken, Kopf freibekommen.</p>
                 </div>
                 <div className="searchCard">
                     <div className="searchRow">
