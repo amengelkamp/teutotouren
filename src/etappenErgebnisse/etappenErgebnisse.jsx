@@ -9,6 +9,15 @@ const SCHWIERIGKEIT_FARBE = {
     schwer: '#f44336',
 };
 
+const REGION_BILDER = {
+    'Teutoburger Wald': '/images/region_teutoburger_wald.jpg',
+    'Eifel':            '/images/region_eifel.jpg',
+    'Harz':             '/images/region_harz.jpg',
+    'Sauerland':        '/images/region_sauerland.jpg',
+    'Schwarzwald':      '/images/region_schwarzwald.jpg',
+    'Rheinsteig':       '/images/region_rheinsteig.jpg',
+};
+
 const EtappenErgebnisse = ({ filters }) => {
     const navigate = useNavigate();
     const [etappen, setEtappen] = useState([]);
@@ -82,13 +91,20 @@ const EtappenErgebnisse = ({ filters }) => {
             ) : (
                 <div className="etappenGrid">
                     {etappen.map((etappe) => (
-                        <div key={etappe.id} className="etappenCard">
+                        <div key={etappe.id} className="etappenCard" onClick={() => navigate(`/etappe/${etappe.id}?mode=${filters.mode || 'auto'}`)}>
                             <div className="cardImageWrapper">
                                 <img
                                     className="cardImage"
-                                    src={etappe.image_path || '/images/placeholder.jpg'}
+                                    src={etappe.image_path || REGION_BILDER[etappe.region] || ''}
                                     alt={`Bild von ${etappe.name}`}
-                                    onError={(e) => { e.target.style.display = 'none'; }}
+                                    onError={(e) => {
+                                        const regionFallback = REGION_BILDER[etappe.region];
+                                        if (regionFallback && !e.target.src.endsWith(regionFallback)) {
+                                            e.target.src = regionFallback;
+                                        } else {
+                                            e.target.style.display = 'none';
+                                        }
+                                    }}
                                 />
                                 {etappe.schwierigkeit && (
                                     <span
@@ -117,7 +133,7 @@ const EtappenErgebnisse = ({ filters }) => {
                                 {etappe.oepnv_hinweis && filters.mode === 'bahn' && (
                                     <div className="cardOepnv">🚌 {etappe.oepnv_hinweis}</div>
                                 )}
-                                <button className="cardCta" onClick={() => navigate(`/etappe/${etappe.id}`)}>Details ansehen →</button>
+                                <span className="cardCta">Details ansehen →</span>
                             </div>
                         </div>
                     ))}

@@ -254,6 +254,11 @@ test.describe('Ergebniskarten', () => {
         await expect(page.locator('.etappenCard')).toHaveCount(anzahl);
     });
 
+    test('Klick auf Karte (beliebige Stelle) navigiert zur Detailseite', async ({ page }) => {
+        await page.locator('.etappenCard').first().click();
+        await expect(page).toHaveURL(/\/etappe\/\d+/);
+    });
+
     test('"Details ansehen" navigiert zur Detailseite', async ({ page }) => {
         await page.locator('.etappenCard').first().locator('.cardCta').click();
         await expect(page).toHaveURL(/\/etappe\/\d+/);
@@ -313,6 +318,16 @@ test.describe('Detailseite', () => {
     test('Schwierigkeits-Badge sichtbar', async ({ page }) => {
         await expect(page.locator('.detailBadge')).toBeVisible();
     });
+
+    test('ÖPNV-Hinweis nur bei mode=bahn sichtbar, nicht bei mode=auto', async ({ page }) => {
+        await page.goto('/etappe/1?mode=auto');
+        await page.waitForFunction(() => !document.querySelector('.detailStatus'), { timeout: 15000 });
+        await expect(page.locator('.detailOepnv')).toHaveCount(0);
+
+        await page.goto('/etappe/1?mode=bahn');
+        await page.waitForFunction(() => !document.querySelector('.detailStatus'), { timeout: 15000 });
+        await expect(page.locator('.detailOepnv')).toBeVisible();
+    });
 });
 
 // ─── API: /traveltime Direkttests ─────────────────────────────────────────────
@@ -354,6 +369,56 @@ test.describe('RegionShowcase', () => {
         expect(count).toBeGreaterThan(0);
     });
 });
+
+// ─── Bilder: Vollständigkeit ──────────────────────────────────────────────────
+
+test.describe('Bilder: Jede Strecke hat ein ladbares Bild', () => {
+    const REGION_BILDER = {
+        'Teutoburger Wald': '/images/region_teutoburger_wald.jpg',
+        'Eifel':            '/images/region_eifel.jpg',
+        'Harz':             '/images/region_harz.jpg',
+        'Sauerland':        '/images/region_sauerland.jpg',
+        'Schwarzwald':      '/images/region_schwarzwald.jpg',
+        'Rheinsteig':       '/images/region_rheinsteig.jpg',
+    };
+
+    test('Alle Trails haben image_path oder ein Regionsbild', async ({ request }) => {
+        const res = await request.get('http://localhost:5000/allTrails');
+        const trails = await res.json();
+
+        const missing = trails.filter(t => !t.image_path && !REGION_BILDER[t.region]);
+        if (missing.length > 0) {
+            console.log(
+                `${missing.length} Strecken ohne Bild:\n` +
+                missing.map(t => `  ID ${t.id}: ${t.name} (${t.region})`).join('\n')
+            );
+        }
+        expect(missing, `${missing.length} Strecken haben weder image_path noch Regionsbild`).toHaveLength(0);
+    });
+
+    test('Alle einzigartigen Bild-URLs sind erreichbar (HTTP 200)', async ({ request }) => {
+        const res = await request.get('http://localhost:5000/allTrails');
+        const trails = await res.json();
+
+        const urls = new Set(
+            trails
+                .map(t => t.image_path || REGION_BILDER[t.region])
+                .filter(Boolean)
+        );
+
+        const broken = [];
+        for (const url of urls) {
+            const imgRes = await request.get(`http://localhost:5173${url}`);
+            if (imgRes.status() !== 200) broken.push({ url, status: imgRes.status() });
+        }
+        if (broken.length > 0) {
+            console.log('Nicht erreichbare Bilder:\n' + broken.map(b => `  ${b.url} → ${b.status}`).join('\n'));
+        }
+        expect(broken, `${broken.length} Bild-URLs liefern kein 200`).toHaveLength(0);
+    });
+});
+
+// ─── API: /traveltime Direkttests ─────────────────────────────────────────────
 
 test.describe('API: /traveltime Fahrzeiten', () => {
     // Erwartete Fahrzeiten mit ±20 Min. Toleranz wegen HERE-Echtzeit-Varianz

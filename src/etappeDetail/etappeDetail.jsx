@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { MapContainer, TileLayer, Marker, Popup, Polyline, useMap } from 'react-leaflet';
 import axios from 'axios';
 import 'leaflet/dist/leaflet.css';
 import './etappeDetail.css';
@@ -13,9 +13,30 @@ L.Icon.Default.mergeOptions({ iconUrl: markerIcon, shadowUrl: markerShadow, icon
 
 const SCHWIERIGKEIT_FARBE = { leicht: '#4caf50', mittel: '#ff9800', schwer: '#f44336' };
 
+function FitBounds({ track }) {
+    const map = useMap();
+    useEffect(() => {
+        if (!track) return;
+        const points = Array.isArray(track[0][0]) ? track.flat() : track;
+        if (points.length > 0) map.fitBounds(points, { padding: [40, 40] });
+    }, [track, map]);
+    return null;
+}
+
+const REGION_BILDER = {
+    'Teutoburger Wald': '/images/region_teutoburger_wald.jpg',
+    'Eifel':            '/images/region_eifel.jpg',
+    'Harz':             '/images/region_harz.jpg',
+    'Sauerland':        '/images/region_sauerland.jpg',
+    'Schwarzwald':      '/images/region_schwarzwald.jpg',
+    'Rheinsteig':       '/images/region_rheinsteig.jpg',
+};
+
 const EtappeDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const mode = searchParams.get('mode') || 'auto';
     const [etappe, setEtappe] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -34,11 +55,14 @@ const EtappeDetail = () => {
             .then(xml => {
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(xml, 'text/xml');
-                const pts = Array.from(doc.querySelectorAll('trkpt')).map(pt => [
-                    parseFloat(pt.getAttribute('lat')),
-                    parseFloat(pt.getAttribute('lon')),
-                ]);
-                setGpxTrack(pts);
+                const segments = Array.from(doc.querySelectorAll('trkseg')).map(seg =>
+                    Array.from(seg.querySelectorAll('trkpt')).map(pt => [
+                        parseFloat(pt.getAttribute('lat')),
+                        parseFloat(pt.getAttribute('lon')),
+                    ])
+                ).filter(seg => seg.length > 0);
+                // flatten single-segment GPX to plain array, multi-segment stays nested
+                setGpxTrack(segments.length === 1 ? segments[0] : segments);
             })
             .catch(() => {});
     }, [etappe?.gpx_path]);
@@ -57,9 +81,16 @@ const EtappeDetail = () => {
             <div className="detailHero">
                 <img
                     className="detailHeroImg"
-                    src={etappe.image_path || '/images/placeholder.jpg'}
+                    src={etappe.image_path || REGION_BILDER[etappe.region] || ''}
                     alt={etappe.name}
-                    onError={(e) => { e.target.style.display = 'none'; }}
+                    onError={(e) => {
+                        const regionFallback = REGION_BILDER[etappe.region];
+                        if (regionFallback && !e.target.src.endsWith(regionFallback)) {
+                            e.target.src = regionFallback;
+                        } else {
+                            e.target.style.display = 'none';
+                        }
+                    }}
                 />
                 <div className="detailHeroOverlay" />
                 <div className="detailHeroContent">
@@ -103,7 +134,7 @@ const EtappeDetail = () => {
                     )}
                 </div>
 
-                {etappe.oepnv_hinweis && (
+                {etappe.oepnv_hinweis && mode === 'bahn' && (
                     <div className="detailOepnv">
                         <span className="detailOepnvIcon">🚌</span>
                         <span>{etappe.oepnv_hinweis}</span>
@@ -114,8 +145,8 @@ const EtappeDetail = () => {
                     <h2 className="detailSectionTitle">Karte</h2>
                     {hasCoords ? (
                         <MapContainer
-                            center={gpxTrack ? gpxTrack[0] : [etappe.start_lat, etappe.start_lon]}
-                            zoom={gpxTrack ? 12 : 11}
+                            center={[etappe.start_lat, etappe.start_lon]}
+                            zoom={11}
                             className="detailMap"
                         >
                             <TileLayer
@@ -126,7 +157,10 @@ const EtappeDetail = () => {
                                 <Popup>Start: {etappe.etappe_startpunkt}</Popup>
                             </Marker>
                             {gpxTrack && (
-                                <Polyline positions={gpxTrack} color="#184D47" weight={3} opacity={0.85} />
+                                <>
+                                    <Polyline positions={gpxTrack} color="#184D47" weight={3} opacity={0.85} />
+                                    <FitBounds track={gpxTrack} />
+                                </>
                             )}
                         </MapContainer>
                     ) : (
